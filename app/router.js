@@ -12,7 +12,7 @@ function(app) {
     },
 
     index: function() {
-
+        app.useLayout("main").render();
     }
   });
 
