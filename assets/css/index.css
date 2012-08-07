@@ -1,10 +1,172 @@
 @import "h5bp.css";
 
+div.clear{ 
+  clear:both;
+  height:1px;
+}
 
 #header{ 
-  height:51px;
+  height:45px;
   background:#e14747;
   color:#eeeeee;
   font-size:24px;
-  padding:8px 10px 0px;
+  padding:12px 10px 0px;
+  box-shadow: 3px 3px 8px 1px #ccc;
+  z-index:100;
+  position:absolute;
+  left:0px;
+  right:0px;
+  top:0px;
+}
+#header ul.nav{ 
+  float:right;
+  margin:0px;
+  padding:0px;
+  margin-right:20px;
+}
+#header ul.nav li{
+  float:left;
+  padding:10px;
+  color:#fff;
+  font-size:14px;
+  list-style:none;
+} 
+#header #searchBox{ 
+  float:right;
+}
+#header #searchBox .btn{
+  float:right;
+} 
+.btn{ 
+  font-size:14px;
+  background:#28b1f0;
+  color:#fff;
+  padding:5px;
+  margin:5px;
+  border-radius:3px;
+}
+#sidebar{ 
+  background:#fff;
+  position:absolute;
+  top:57px;
+  left:0px;
+  bottom:0px;
+  width:315px;
+  border-right:solid 2px #d2d2d2;
+}
+#sidebar #about{ 
+  font-size:14px;
+  margin:20px 15px;
+}
+
+#sidebar h2{ 
+  margin:25px 10px 5px;
+  border-bottom:solid 2px #000;
+  font-size:14px;
+  line-height:20px;
+  text-transform:uppercase;
+  font-weight:bold;
+}
+#sidebar h3{ 
+  margin:25px 10px 5px;
+  font-size:18px
+  line-height:20px;
+  font-weight:normal;
+}
+
+#locationFilter ul{ 
+  margin:0px 5px;
+  padding:0px;
+}
+#locationFilter ul li{
+  float:left;
+  list-style:none;
+  padding:3px 5px;
+  background:#e14747;
+  color:#fff;
+  font-size:12px;
+  border-radius:3px;
+  margin:5px 5px;
+} 
+#locationFilter ul li.addLocation{
+  background:#8a8686;
+  color:#fff;
+}
+#locationFilter ul li .close{
+  color:#000;
+  font-size:0.8em;
+  font-weight:bold;
+}
+#filters .clearFilters{ 
+  float:right;
+  position:relative;
+  top:-25px;
+  left:-10px;
+  font-size:12px;
+  color:#000;
+}
+#filters .controls{ 
+  margin:5px 10px;
+}
+#filters label{ 
+  font-size:12px;
+  font-weight:bold;
+  margin-right:15px;
+}
+#filters .controls .row{
+  margin:10px 0px 5px;
+} 
+
+.dateSelector{ 
+  width:250px;
+  height:15px;
+  background:#ccc;
+  border-radius:5px;
+  margin:auto;
+}
+
+#results .serviceRequests{ 
+  background:#d7d6d6;
+  color:#000;
+  position:absolute;
+  bottom:0px;
+  left:0px;
+  right:0px;
+  height:300px;
+}
+#results .serviceRequests .sort{
+  padding:10px;
+  max-height:40px;
+} 
+#results .serviceRequests ul{
+  margin:0px;
+  padding:0px;
+} 
+#results .serviceRequests ul li{
+  padding:10px 5px;
+  height:55px;
+  background:#f2f2f2;
+  border-top:solid 1px #fff;
+}
+#results .serviceRequests ul li img{
+  float:right;
+  width:75px;
+  height:75px;
+  margin-top:-10px;
+  margin-right:-5px;
+}
+
+#results .serviceRequests .paging{ 
+  padding:10px;
+  max-height:40px;
+}
+#results .serviceRequests .paging .prev{
+  float:left;
+}
+#results .serviceRequests .paging .next{
+  float:right;
+}
+#results .serviceRequests .paging .pagecount{ 
+  margin:auto;
+  width:85px;
 }
