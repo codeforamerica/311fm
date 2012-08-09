@@ -7,6 +7,9 @@
     </select>
   </div>
   <ul>
+      {{#each this.collection}}
+      <li>{{this.service_name}}</li>
+      {{/each}}
     <li>
       <img src="" />
       <div class="title">Sign Missing or damaged</div>

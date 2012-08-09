@@ -32,7 +32,7 @@ function($, _, Backbone) {
 
       if (!JST[path]) {
         $.ajax({ url: app.root + path, async: false }).then(function(contents) {
-          JST[path] = _.template(contents);
+          JST[path] = Handlebars.compile(contents);
         });
       } 
       

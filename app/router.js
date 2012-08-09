@@ -1,12 +1,11 @@
 define([
   // Application.
   "app",
-  "modules/location",
   "modules/filter",
   "modules/serviceRequest"
 ],
 
-       function(app, Location, Filter, ServiceRequest) {
+function(app, Filter, ServiceRequest) {
 
   // Defining the application router, you can attach sub routers here.
   var Router = Backbone.Router.extend({
@@ -24,25 +23,21 @@ define([
     },
     initialize: function(){
 
-      this.location = new Location.Model();
       this.filter = new Filter.Model();
-      this.serviceRequest = new ServiceRequest.Model();
+      this.serviceRequest = new ServiceRequest.Collection();
       app.useLayout("main");
 
 
       //these should be a collection
       app.layout.setViews({
-        "#searchBox": new Location.Views.Search({
-          model: this.location
-        }),
-        "#locationFilter": new Location.Views.Filter({
-          model: this.location
+        "#searchBox": new Filter.Views.Search({
+          model: this.filter
         }),
         "#filters": new Filter.Views.Controls({
           model: this.filter
         }),
         "#results": new ServiceRequest.Views.Results({
-          model: this.serviceRequest  
+          collection: this.serviceRequest  
         })
 
       });
