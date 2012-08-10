@@ -78,6 +78,7 @@ module.exports = function(grunt) {
     mincss: {
       "dist/release/index.css": [
         "assets/css/h5bp.css"
+        "assets/css/main.css"
       ]
     },
 
