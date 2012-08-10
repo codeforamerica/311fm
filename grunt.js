@@ -107,7 +107,7 @@ module.exports = function(grunt) {
     server: {
       // Ensure the favicon is mapped correctly.
       files: { "favicon.ico": "favicon.ico" },
-
+      host: "0.0.0.0",
       debug: {
         // Ensure the favicon is mapped correctly.
         files: { "favicon.ico": "favicon.ico" },
