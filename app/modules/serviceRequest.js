@@ -21,11 +21,14 @@ function(app) {
       //https://mayors24.cityofboston.gov/open311/v2/requests.json
       console.log(collection);
       if(method == "read"){
-        $.ajax("http://localhost:3005/open311/v2/requests.json", {data:options.data, 
-                                                                  dataType:"jsonp", 
+        $.ajax("http://localhost:3005/open311/v2/requests.json", {data:options.data,
+                                                                  dataType:"jsonp",
                                                                   success:function(data){
-                                                                      collection.add(data)
-                                                                  }});
+                                                                    collection.add(data);
+                                                                  },
+                                                                  error:function(err,b,c){
+                                                                    console.log(err,b,c);
+                                                                  }}, "json");
       }
 
     }
@@ -54,8 +57,13 @@ function(app) {
     cleanup: function() {
       //this.model.off(null, null, this);
     },
+    serialize: function(){
+      console.log({collection:this.collection});
+      return {collection:this.collection};
+    },
     initialize: function() {
       this.collection.on("change", this.render, this);
+      this.collection.on("add", this.render, this);
       //this.model.on("reset", this.render, this);
       this.collection.fetch();
     }

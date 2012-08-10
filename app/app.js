@@ -26,7 +26,7 @@ function($, _, Backbone) {
       layout: "app/templates/layouts/",
       template: "app/templates/"
     },
-
+    manage: true,
     fetch: function(path) {
       path = path + ".html";
 
@@ -37,6 +37,9 @@ function($, _, Backbone) {
       } 
       
       return JST[path];
+    },
+    render: function(template, context) {
+      return template(context);
     }
   });
 

@@ -141,6 +141,8 @@ div.clear{
 #results .serviceRequests ul{
   margin:0px;
   padding:0px;
+  height:220px;
+  overflow:auto;
 } 
 #results .serviceRequests ul li{
   padding:10px 5px;
