@@ -1,1 +1,1 @@
-web: bbb server
+web: bbb release server:release
