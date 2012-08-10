@@ -21,7 +21,7 @@ function(app) {
       //https://mayors24.cityofboston.gov/open311/v2/requests.json
       console.log(collection);
       if(method == "read"){
-        $.ajax("http://localhost:3005/open311/v2/requests.json", {data:options.data,
+        $.ajax("http://open311proxy.herokuapp.com/open311/v2/requests.json", {data:options.data,
                                                                   dataType:"jsonp",
                                                                   success:function(data){
                                                                     collection.add(data);
