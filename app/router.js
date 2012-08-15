@@ -27,19 +27,19 @@ function(app, Filter, ServiceRequest) {
       this.serviceRequest = new ServiceRequest.Collection();
       app.useLayout("main");
 
-
       //these should be a collection
       app.layout.setViews({
         "#searchBox": new Filter.Views.Search({
           model: this.filter
         }),
+
         "#filters": new Filter.Views.Controls({
           model: this.filter
         }),
+        
         "#results": new ServiceRequest.Views.Results({
           collection: this.serviceRequest  
         })
-
       });
     }
   });

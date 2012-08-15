@@ -1,73 +1,74 @@
-describe("one tautology", function() {
-  it("is a tautology", function() {
-    expect(true).toBeTruthy();
-  });
+define([
+  // Application.
+  "app",
 
-  describe("is awesome", function() {
-    it("is awesome", function() {
-      expect(1).toBe(1);
-    });
-  });
-});
+  // // Modules
+  "modules/filter"
+],
 
-describe("simple tests", function() {
-  it("increments", function() {
-    var mike = 0;
+function(app, Filter) {
 
-    expect(mike++ === 0).toBeTruthy();
-    expect(mike === 1).toBeTruthy();
-  });
+  describe("test Search View", function() {
 
-  it("increments (improved)", function() {
-    var mike = 0;
+    // XXX: does not work as expected
+    xit("instantiating without model object throws exception", function() {
 
-    expect(mike++).toBe(0);
-    expect(mike).toBe(1);
-  });
-});
+      // create new view with no model object - this throws
+      // because view attempts to wire events to model object
+      // but can't because it is undefined
+      var searchView = new Filter.Views.Search();
+      
+      // // but we never reach this because the error happened above.
+      expect(searchView).toThrow();
 
-describe("setUp/tearDown", function() {
-  beforeEach(function() {
-    // console.log("Before");
-  });
+      // // this does not work either
+      // expect(new Filter.Views.Search()).toThrow();
 
-  afterEach(function() {
-    // console.log("After");
-  });
-
-  it("example", function() {
-    // console.log("During");
-  });
-
-  describe("setUp/tearDown", function() {
-    beforeEach(function() {
-      // console.log("Before2");
     });
 
-    afterEach(function() {
-      // console.log("After2");
+    it("is uses filter/search for template value", function() {
+
+      // create new view
+      var searchView = new Filter.Views.Search(new Filter.Model());
+
+      // assert
+      expect(searchView.template).toBe("filter/search");
+
     });
 
-    it("example", function() {
-      // console.log("During Nested");
+    it("is uses div for tagName value", function() {
+
+      // create new view
+      var searchView = new Filter.Views.Search(new Filter.Model());
+
+      // assert
+      expect(searchView.tagName).toBe("div");
+
     });
+
+    it("is uses searchBox for id value", function() {
+
+      // create new view
+      var searchView = new Filter.Views.Search(new Filter.Model());
+
+      // assert
+      expect(searchView.id).toBe("searchBox");
+
+    });    
+
+    it("it contains expected event definitions", function() {
+
+      // create new view
+      var searchView = new Filter.Views.Search(new Filter.Model());
+
+      // assert
+      expect(searchView.events["click .btn"]).toBe("findLocation");
+      expect(searchView.events["keypress #search"]).toBe("enterSearch");
+
+    });        
+
   });
+
 });
 
-describe("async", function() {
-  it("multiple async", function() {
-    var semaphore = 2;
 
-    setTimeout(function() {
-      expect(true).toBeTruthy();
-      semaphore--;
-    }, 500);
-
-    setTimeout(function() {
-      expect(true).toBeTruthy();
-      semaphore--;
-    }, 500);
-
-    waitsFor(function() { return semaphore === 0 });
-  });
-});
