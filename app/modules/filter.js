@@ -47,8 +47,8 @@ function(app) {
     },
 
     initialize: function() {
-      this.model.on("change", this.render, this);
-      this.model.on("reset", this.render, this);
+      this.collection.on("change", this.render, this);
+      this.collection.on("reset", this.render, this);
     }
   });
 
@@ -82,8 +82,8 @@ function(app) {
     },
 
     initialize: function() {
-      this.model.on("change", this.render, this);
-      this.model.on("reset", this.render, this);
+      this.collection.on("change", this.render, this);
+      this.collection.on("reset", this.render, this);
     }  
   });
 

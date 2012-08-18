@@ -4,66 +4,98 @@ div.clear{
 }
 
 #header{ 
-  height:45px;
-  background:#e14747;
+  height:40px;
+  background:#2b77ab;
   color:#eeeeee;
   font-size:24px;
-  padding:12px 10px 0px;
-  box-shadow: 3px 3px 8px 1px #ccc;
+  padding:4px 10px 3px;
+  box-shadow: 0px 3px 8px 1px #333;
   z-index:100;
   position:absolute;
   left:0px;
   right:0px;
   top:0px;
+  z-index:101;
 }
-#header ul.nav{ 
+#header ul.links{ 
   float:right;
   margin:0px;
   padding:0px;
   margin-right:20px;
 }
-#header ul.nav li{
+#header ul.links li{
   float:left;
   padding:10px;
   color:#fff;
-  font-size:14px;
+  font-size:12px;
   list-style:none;
 } 
 #header #searchBox{ 
   float:right;
 }
+#header #searchBox input{
+  height:20px;
+  margin-top:5px;
+} 
 #header #searchBox .btn{
   float:right;
 } 
+#subnav{ 
+  position:absolute;
+  top:46px;
+  left:-105px;
+  bottom:0px;
+  width:100px;
+  z-index:100;
+  overflow:none;
+}
 .btn{ 
   font-size:14px;
-  background:#28b1f0;
+  background:#fb6900;
   color:#fff;
-  padding:5px;
-  margin:5px;
+  padding:3px 5px;
+  margin:6px 5px 5px 5px;
   border-radius:3px;
 }
 #sidebar{ 
   background:#fff;
   position:absolute;
-  top:57px;
+  top:48px;
   left:0px;
   bottom:0px;
   width:315px;
   border-right:solid 2px #d2d2d2;
+  z-index:100;
 }
+ul.nav{ 
+  margin:0px;
+  padding:0px 0px 0px 10px;
+}
+ul.nav li { 
+  float:left;
+  list-style:none;
+  height:40px;
+  text-align:center;
+  padding:30px 10px 5px;
+  background:#fff;
+  font-size:12px;
+}
+
 #sidebar #about{ 
   font-size:14px;
-  margin:20px 15px;
+  margin:20px 35px 20px 15px;
 }
 
 #sidebar h2{ 
-  margin:25px 10px 5px;
-  border-bottom:solid 2px #000;
+  border-bottom:solid 2px #e2e2e2;
   font-size:14px;
   line-height:20px;
   text-transform:uppercase;
   font-weight:bold;
+  padding:4px 10px;
+  background:url(/assets/img/sidebar_header_background.png);
+  height:19px;
+  color:#21496b;
 }
 #sidebar h3{ 
   margin:25px 10px 5px;
@@ -72,25 +104,26 @@ div.clear{
   font-weight:normal;
 }
 
-#locationFilter ul{ 
+#filters ul{ 
   margin:0px 5px;
   padding:0px;
 }
-#locationFilter ul li{
+#filters  ul.location li{
   float:left;
   list-style:none;
   padding:3px 5px;
-  background:#e14747;
+  background:#fb6900;
   color:#fff;
   font-size:12px;
   border-radius:3px;
   margin:5px 5px;
+  font-weight:bold;
 } 
-#locationFilter ul li.addLocation{
+#filters ul li.addLocation{
   background:#8a8686;
   color:#fff;
 }
-#locationFilter ul li .close{
+#filters ul li .close{
   color:#000;
   font-size:0.8em;
   font-weight:bold;
@@ -98,10 +131,10 @@ div.clear{
 #filters .clearFilters{ 
   float:right;
   position:relative;
-  top:-25px;
+  top:-33px;
   left:-10px;
   font-size:12px;
-  color:#000;
+  color:#fb6900;
 }
 #filters .controls{ 
   margin:5px 10px;
@@ -169,4 +202,47 @@ div.clear{
 #results .serviceRequests .paging .pagecount{ 
   margin:auto;
   width:85px;
+}
+
+#sidebar img.toomany{ 
+  margin:17px;
+}
+#sidebar div.nubbin{ 
+  background:url(/assets/img/nubbin.png);
+  position:absolute;
+  top:30px;
+  right:-1px;
+  width:33px;
+  height:34px;
+}
+
+
+#mapbox{ 
+  position:absolute;
+  right:0px;
+  bottom:0px;
+  top:48px;
+  left:0px;
+
+}
+
+#barnav{ 
+  height:100%;
+}
+#barnav ul.nav{ 
+  padding:0px;
+}
+#barnav ul.nav li{ 
+  float:inherit;
+  border-right: solid 2px orange;
+  padding:30px 0px 5px 10px;
+  height:40px;
+}
+#barnav ul li.selected{
+  background:url(/assets/img/notch.png) -8px 0px;
+  border:none;
+} 
+#barnav ul li.last{ 
+  width:88px;
+  height:3000px;
 }
