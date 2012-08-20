@@ -27,7 +27,7 @@ function(app) {
     id: "barnav",
     
     events: {
-      "click .tab": "navigationChange",
+      "click li": "navigationChange",
     },
     afterRender:function(){
       $("#sidebar div.nubbin").click(this.show);
@@ -37,14 +37,20 @@ function(app) {
       this.hide();
     },
     show:function(){
-      $("#sidebar").animate({"left": -325}, {complete:function(){
-                                               $("#subnav").animate({"left": 0});
-                                            }});
+      $("#sidebar").removeClass("active");
+      //$("#subnav").addClass("active");
+      setTimeout(function(){$("#subnav").addClass("active");}, 200);
+//      $("#sidebar").animate({"left": -325}, {complete:function(){
+//                                               $("#subnav").animate({"left": 0});
+//                                            }});
     },
     hide: function(){
-      $("#subnav").animate({"left": -105}, {complete:function(){
-                                              $("#sidebar").animate({"left": 0});
-                                            }});
+      $("#subnav").removeClass("active");
+      setTimeout(function(){$("#sidebar").addClass("active");}, 200);
+      
+//      $("#subnav").animate({"left": -105}, {complete:function(){
+//                                              $("#sidebar").animate({"left": 0});
+//                                            }});
     },
     cleanup: function() {
       this.model.off(null, null, this);

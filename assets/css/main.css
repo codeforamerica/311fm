@@ -43,12 +43,34 @@ div.clear{
 #subnav{ 
   position:absolute;
   top:46px;
-  left:-105px;
+  left:-101px;
   bottom:0px;
   width:100px;
   z-index:100;
   overflow:none;
+  -webkit-transition: all 0.5s ease-in-out;
 }
+#subnav.active{ 
+  left:0px;
+  -webkit-transition: all 0.5s ease-in-out;
+}
+
+#sidebar{
+  background:#fff;
+  position:absolute;
+  top:48px;
+  left:-325px;
+  bottom:0px;
+  width:315px;
+  border-right:solid 2px #d2d2d2;
+  z-index:100;
+  -webkit-transition: all 0.5s ease-in-out;
+}
+#sidebar.active{ 
+  left:0px;
+  -webkit-transition: all 0.5s ease-in-out;
+}
+
 .btn{ 
   font-size:14px;
   background:#fb6900;
@@ -56,16 +78,6 @@ div.clear{
   padding:3px 5px;
   margin:6px 5px 5px 5px;
   border-radius:3px;
-}
-#sidebar{ 
-  background:#fff;
-  position:absolute;
-  top:48px;
-  left:0px;
-  bottom:0px;
-  width:315px;
-  border-right:solid 2px #d2d2d2;
-  z-index:100;
 }
 ul.nav{ 
   margin:0px;
