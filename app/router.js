@@ -12,9 +12,10 @@ function(app, Filter, ServiceRequest, Navigation, Map) {
   // Defining the application router, you can attach sub routers here.
   var Router = Backbone.Router.extend({
     routes: {
-      "": "index"
+      "": "index",
+      "map": "map",
+      "list": "list"
     },
-
     index: function() {
         this.reset();
         app.useLayout("main").render();
@@ -22,12 +23,21 @@ function(app, Filter, ServiceRequest, Navigation, Map) {
     },
     map: function(){
       app.layout.setViews({
-        "#mapbox": new Map.Views.Map({
+        "#content": new Map.Views.Map({
           serviceRequests:this.serviceRequests,
           filters:this.filters
         })
       });
     },
+    list: function(){
+      app.layout.setViews({
+        "#content": new Map.Views.Map({
+          serviceRequests:this.serviceRequests,
+          filters:this.filters
+        })
+      });
+    },
+
     reset: function(){
 
     },
@@ -46,7 +56,6 @@ function(app, Filter, ServiceRequest, Navigation, Map) {
         "#filters": new Filter.Views.Controls({
           collection: this.filters
         }),
-        
         "#results": new ServiceRequest.Views.Results({
           collection: this.serviceRequest  
         }),
