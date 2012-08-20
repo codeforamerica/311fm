@@ -30,6 +30,7 @@ function(app) {
       "click li": "navigationChange",
     },
     afterRender:function(){
+      //TODO fix super hack - Mick
       $("#sidebar div.nubbin").click(this.show);
     },
     navigationChange: function(ev){ 
