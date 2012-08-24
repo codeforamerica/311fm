@@ -64,9 +64,23 @@ function(app) {
       "click .status": "statusChange",
       "onchange .date": "dateChange",
       "click .addNewLocation": "newLocation",
-      "click .removeLocation": "removeLocation"
+      "click .removeLocation": "removeLocation",
+      "click ul.nav li": "navigationChange",
+      "click div.nubbin": "colapse",
     },
-
+    afterRender: function(){
+      $(this.el).find("ul.nav li."+this.selected).addClass("selected");
+      $("#sidebar div.nubbin").click(function(){app.trigger("show_nav");});
+    },
+    colapse:function(ev){
+      app.trigger("show_nav");
+    },
+    navigationChange: function(ev){ 
+      //check which one
+      var view = $(ev.target).closest("li").removeClass("selected").attr("class");
+      app.router.navigate(view, {trigger:false});
+      app.trigger("view_change",{view:view});
+    },
     serviceChange: function(ev){ /* TBD */ },
 
     statusChange: function(ev){ /* TBD */ },
@@ -78,12 +92,25 @@ function(app) {
     removeLocation: function(ev){ /* TBD */ },
 
     cleanup: function() {
-      this.model.off(null, null, this);
+      this.collection.off(null, null, this);
     },
-
+    hide:function(ev){
+      $("#sidebar").removeClass("active");
+    },
+    show:function(ev){
+      setTimeout(function(){$("#sidebar").addClass("active");}, 200);
+    },
+    handleViewChange:function(ev){
+      $(this.el).find("ul.nav li").removeClass("selected");
+      this.selected = ev.view;
+      $(this.el).find("ul.nav li."+this.selected).addClass("selected");
+    },
     initialize: function() {
       this.collection.on("change", this.render, this);
       this.collection.on("reset", this.render, this);
+      app.on("show_nav", this.hide, this);
+      app.on("show_filters", this.show, this);
+      app.on("view_change", this.handleViewChange, this)
     }  
   });
 

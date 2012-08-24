@@ -227,12 +227,18 @@ ul.nav li {
   width:33px;
   height:34px;
 }
-
-#map{ 
+#content{ 
   position:absolute;
   right:0px;
   bottom:0px;
   top:48px;
+  left:0px;  
+}
+#map{ 
+  position:absolute;
+  right:0px;
+  bottom:0px;
+  top:0px;
   left:0px;
 }
 

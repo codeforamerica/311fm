@@ -31,32 +31,42 @@ function(app) {
     },
     afterRender:function(){
       //TODO fix super hack - Mick
-      $("#sidebar div.nubbin").click(this.show);
+      $(this.el).find("li."+this.selected).addClass("selected");
+
+      console.log("HEREEREEREERE")
+
     },
     navigationChange: function(ev){ 
       //check which one
-      this.hide();
+      var view = $(ev.target).closest("li").attr("class").replace(" selected", "");
+
+      if(view == "filters")
+        app.trigger("show_filters");
+      else{
+        app.router.navigate(view, {trigger:false});
+        app.trigger("view_change", {view:view});
+      }
     },
     show:function(){
-      $("#sidebar").removeClass("active");
-      //$("#subnav").addClass("active");
       setTimeout(function(){$("#subnav").addClass("active");}, 200);
-//      $("#sidebar").animate({"left": -325}, {complete:function(){
-//                                               $("#subnav").animate({"left": 0});
-//                                            }});
     },
     hide: function(){
       $("#subnav").removeClass("active");
-      setTimeout(function(){$("#sidebar").addClass("active");}, 200);
-      
-//      $("#subnav").animate({"left": -105}, {complete:function(){
-//                                              $("#sidebar").animate({"left": 0});
-//                                            }});
     },
     cleanup: function() {
-      this.model.off(null, null, this);
+
     },
-    initialize: function() { }  
+    handleViewChanged:function(ev){
+      $(this.el).find("ul.nav li").removeClass("selected");
+      this.selected = ev.view;
+      $(this.el).find("ul.nav li."+this.selected).addClass("selected");
+    },
+    initialize: function(opt) { 
+      this.selected = opt.selected;
+      app.on("show_nav", this.show, this);
+      app.on("show_filters", this.hide, this);
+      app.on("view_change", this.handleViewChanged, this);
+    }  
   });
 
   // Return the module for AMD compliance.
