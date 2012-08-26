@@ -328,3 +328,10 @@ div#content div#list table tr:nth-child(odd) { background-color:#fff; }
 div#content div#list{ 
   margin:20px 20px 20px 120px;
 }
+td.media{ 
+  width:120px;
+}
+img.media{ 
+  max-width:120px;
+
+}
