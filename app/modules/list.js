@@ -16,11 +16,11 @@ function(app) {
     events: {},
 
     afterRender: function(ev){ 
-      console.log("rendered list");
     },
 
     cleanup: function() {
       this.serviceRequests.off(null, null, this);
+      app.off(null, null, this);
     },
     serialize: function(){
       return {serviceRequests:this.serviceRequests}

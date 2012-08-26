@@ -34,12 +34,13 @@ function(app) {
     },
 
     cleanup: function() {
-
+      app.off(null, null, this);
     },
 
     initialize: function() {
 
-
+      app.on("show_filters", function(){$("#content").addClass("sidebar");}, this);
+      app.on("show_nav", function(){$("#content").removeClass("sidebar");}, this);
     }  
   });
 
