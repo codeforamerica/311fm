@@ -60,9 +60,9 @@ function(app) {
     id: "filters",
     
     events: {
-      "onchange .services": "serviceChange",
-      "click .status": "statusChange",
-      "onchange .date": "dateChange",
+      "change .services": "serviceChange",
+      "change .status": "statusChange",
+      "change .date": "dateChange",
       "click .addNewLocation": "newLocation",
       "click .removeLocation": "removeLocation",
       "click ul.nav li": "navigationChange",
@@ -83,7 +83,25 @@ function(app) {
     },
     serviceChange: function(ev){ /* TBD */ },
 
-    statusChange: function(ev){ /* TBD */ },
+    statusChange: function(ev){
+      var open=false, closed = false;
+      open =$(this.el).find(".status[name=open]").is(":checked");
+      closed =$(this.el).find(".status[name=closed]").is(":checked");
+      
+      if(!(closed && open)){
+        //if they arent both true
+        var value = closed ? "closed": "open";
+
+        var status = this.collection.where({name:"status"})[0];
+        if(!status)
+          this.collection.add({name:"status", value:value});
+        else
+          status.set("value", value);
+      }else{
+        status = this.collection.where({name:"status"});
+        this.collection.remove(status);
+      }
+    },
 
     dateChange:function(ev){ /* TBD */ },
 
@@ -106,8 +124,8 @@ function(app) {
       $(this.el).find("ul.nav li."+this.selected).addClass("selected");
     },
     initialize: function() {
-      this.collection.on("change", this.render, this);
-      this.collection.on("reset", this.render, this);
+      //this.collection.on("change", this.render, this);
+      //this.collection.on("reset", this.render, this);
       app.on("show_nav", this.hide, this);
       app.on("show_filters", this.show, this);
       app.on("view_change", this.handleViewChange, this)

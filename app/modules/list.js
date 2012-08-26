@@ -16,13 +16,22 @@ function(app) {
     events: {},
 
     afterRender: function(ev){ 
+      console.log("rendered list");
     },
 
     cleanup: function() {
+      this.serviceRequests.off(null, null, this);
+    },
+    serialize: function(){
+      return {serviceRequests:this.serviceRequests}
     },
     initialize: function(e) {
       this.serviceRequests  = e.serviceRequests;
-      this.filters = e.serviceRequests;
+      this.filters = e.filters;
+      this.serviceRequests.on("reset", this.render, this);
+      this.serviceRequests.on("change", this.render, this);
+      app.on("show_filters", function(){$("#content").addClass("sidebar");}, this);
+      app.on("show_nav", function(){$("#content").removeClass("sidebar");}, this);
     }
   });
 

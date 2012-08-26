@@ -47,7 +47,7 @@ div.clear{
   bottom:0px;
   width:100px;
   z-index:100;
-  overflow:none;
+  overflow:hidden;
   -webkit-transition: all 0.5s ease-in-out;
 }
 #subnav.active{ 
@@ -233,7 +233,16 @@ ul.nav li {
   bottom:0px;
   top:48px;
   left:0px;  
+  overflow:auto;
+  -webkit-transition: left 0.5s ease-in-out;
+  -webkit-transition-delay: 0.1s;
+
 }
+#content.sidebar{
+  left:215px;
+  -webkit-transition: all 0.5s ease-in-out;
+  -webkit-transition-delay: 0.3s;
+} 
 #map{ 
   position:absolute;
   right:0px;
@@ -243,7 +252,9 @@ ul.nav li {
 }
 
 #barnav{ 
-  height:100%;
+
+
+
 }
 #barnav ul.nav{ 
   padding:0px;
@@ -283,3 +294,37 @@ ul.nav li.list.selected div{ background-position:250px 43px; }
 ul.nav li.graphs.selected div{ background-position:200px 43px; }
 ul.nav li.compare.selected div{ background-position:150px 43px; }
 ul.nav li.browse.selected div{ background-position:100px 43px; }
+
+div#content div#list{ 
+  position:absolute;
+  top:0px;
+  left:0px;
+  right:0px;
+  bottom:0px;
+}
+
+div#content div#list table{ 
+  border:solid 1px #d8d8d8;
+  border-right:none;
+  border-bottom:none;
+  width:100%;
+}
+div#content div#list table th{
+  border-bottom:solid 2px #000;
+  border-right:solid 1px #d8d8d8;
+  height:30px;
+  text-align:left;
+  padding:5px;
+} 
+div#content div#list table td{
+  border-right:solid 1px #d8d8d8;
+  border-bottom:solid 1px #d8d8d8;;
+  min-width:120px;
+  max-width:250px;
+  overflow:auto;
+}
+div#content div#list table tr:nth-child(even){ background-color:#eee; }
+div#content div#list table tr:nth-child(odd) { background-color:#fff; }
+div#content div#list{ 
+  margin:20px 20px 20px 120px;
+}

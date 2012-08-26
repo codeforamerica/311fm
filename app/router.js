@@ -45,13 +45,10 @@ define([
         filters:this.filters
       })).render();
       app.trigger("view_change", {view:"graphs"});
-      //app.layout.setViews({
-      //  "#content": 
-      //}).render();
     },
     initialize: function(){
-      this.filters = new Filter.Collection();
-      this.serviceRequest = new ServiceRequest.Collection();
+      app.filters = this.filters = new Filter.Collection();
+      this.serviceRequests = new ServiceRequest.Collection();
       app.useLayout("main").render();
 
       //these should be a collection
@@ -60,7 +57,7 @@ define([
           collection: this.filters
         }),
         "#results": new ServiceRequest.Views.Results({
-          collection: this.serviceRequest  
+          collection: this.serviceRequests
         }),
         "#subnav": new Navigation.Views.SubNav({
         }),
@@ -70,6 +67,24 @@ define([
 
       });
       app.on("view_change", this.handleViewChanged, this);
+      this.filters.on("add", function(){
+        console.log(" on add reset service requests")
+        this.serviceRequests.fetch();
+
+      }, this);
+      this.filters.on("change", function(){
+
+        console.log(" on change reset service requests")
+        this.serviceRequests.fetch();
+
+      }, this);
+      this.filters.on("remove", function(){
+
+        console.log(" on change reset service requests")
+        this.serviceRequests.fetch();
+
+      }, this);
+
     },
     handleViewChanged: function(ev){
       console.log("view changed", ev);
