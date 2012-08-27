@@ -307,7 +307,8 @@ ul.nav li {
   height:40px;
 }
 
-#barnav ul li.selected{
+#barnav ul li.selected
+{
   background:url(/assets/img/notch.png) -8px 22px;
   border:none;
 }
@@ -332,12 +333,12 @@ ul.nav li.graphs div{ background-position:200px 0px; }
 ul.nav li.compare div{ background-position:150px 0px; }
 ul.nav li.browse div{ background-position:100px 0px; }
 
-ul.nav li.filters.selected div{ background-position:50px 43px; }
-ul.nav li.map.selected div{ background-position:0px 43px; }
-ul.nav li.list.selected div{ background-position:250px 43px; }
-ul.nav li.graphs.selected div{ background-position:200px 43px; }
-ul.nav li.compare.selected div{ background-position:150px 43px; }
-ul.nav li.browse.selected div{ background-position:100px 43px; }
+ul.nav li.filters.selected div, ul.nav li.filters:hover div { background-position:50px 43px; }
+ul.nav li.map.selected div, ul.nav li.map:hover div { background-position:0px 43px; }
+ul.nav li.list.selected div, ul.nav li.list:hover div { background-position:250px 43px; }
+ul.nav li.graphs.selected div, ul.nav li.graphs:hover div { background-position:200px 43px; }
+ul.nav li.compare.selected div, ul.nav li.compare:hover div { background-position:150px 43px; }
+ul.nav li.browse.selected div, ul.nav li.browse:hover div { background-position:100px 43px; }
 
 div#content div#list{ 
   position:absolute;
