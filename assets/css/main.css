@@ -47,8 +47,11 @@ div.clear{
 }
 
 #header #searchBox input{
-  height:20px;
-  margin-top:5px;
+  font-size: 14px;
+  height: 20px;
+  width: 260px;
+  margin-top: 5px;
+  padding-left: 5px;
 }
 
 #header #searchBox .btn{
