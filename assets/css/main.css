@@ -17,29 +17,50 @@ div.clear{
   top:0px;
   z-index:101;
 }
+
 #header ul.links{ 
   float:right;
   margin:0px;
   padding:0px;
   margin-right:20px;
 }
+
 #header ul.links li{
   float:left;
   padding:10px;
   color:#fff;
   font-size:12px;
   list-style:none;
-} 
+}
+
+#header a {
+  color: white;
+  text-decoration: none;
+}
+
+#header a:hover {
+  text-decoration: underline;
+}
+
 #header #searchBox{ 
   float:right;
 }
+
 #header #searchBox input{
-  height:20px;
-  margin-top:5px;
-} 
+  font-size: 14px;
+  height: 20px;
+  width: 260px;
+  margin-top: 5px;
+  padding-left: 5px;
+  -webkit-box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.5);
+ -moz-box-shadow: inset 0 2px 3px rgba(0,0,0,0.5);
+ box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.5);
+}
+
 #header #searchBox .btn{
   float:right;
-} 
+}
+
 #subnav{ 
   position:absolute;
   top:46px;
@@ -50,6 +71,7 @@ div.clear{
   overflow:hidden;
   -webkit-transition: all 0.5s ease-in-out;
 }
+
 #subnav.active{ 
   left:0px;
   -webkit-transition: all 0.5s ease-in-out;
@@ -66,6 +88,7 @@ div.clear{
   z-index:100;
   -webkit-transition: all 0.5s ease-in-out;
 }
+
 #sidebar.active{ 
   left:0px;
   -webkit-transition: all 0.5s ease-in-out;
@@ -78,11 +101,18 @@ div.clear{
   padding:3px 5px;
   margin:6px 5px 5px 5px;
   border-radius:3px;
+  cursor: pointer;
 }
+
+.btn:hover {
+  background: #FB3F00;
+}
+
 ul.nav{ 
   margin:0px;
   padding:0px 0px 0px 10px;
 }
+
 ul.nav li { 
   float:left;
   list-style:none;
@@ -109,6 +139,7 @@ ul.nav li {
   height:19px;
   color:#21496b;
 }
+
 #sidebar h3{ 
   margin:25px 10px 5px;
   font-size:18px
@@ -120,6 +151,7 @@ ul.nav li {
   margin:0px 5px;
   padding:0px;
 }
+
 #filters  ul.location li{
   float:left;
   list-style:none;
@@ -131,15 +163,18 @@ ul.nav li {
   margin:5px 5px;
   font-weight:bold;
 } 
+
 #filters ul li.addLocation{
   background:#8a8686;
   color:#fff;
 }
+
 #filters ul li .close{
   color:#000;
   font-size:0.8em;
   font-weight:bold;
 }
+
 #filters .clearFilters{ 
   float:right;
   position:relative;
@@ -148,14 +183,17 @@ ul.nav li {
   font-size:12px;
   color:#fb6900;
 }
+
 #filters .controls{ 
   margin:5px 10px;
 }
+
 #filters label{ 
   font-size:12px;
   font-weight:bold;
   margin-right:15px;
 }
+
 #filters .controls .row{
   margin:10px 0px 5px;
 } 
@@ -177,22 +215,26 @@ ul.nav li {
   right:0px;
   height:300px;
 }
+
 #results .serviceRequests .sort{
   padding:10px;
   max-height:40px;
 } 
+
 #results .serviceRequests ul{
   margin:0px;
   padding:0px;
   height:220px;
   overflow:auto;
 } 
+
 #results .serviceRequests ul li{
   padding:10px 5px;
   height:55px;
   background:#f2f2f2;
   border-top:solid 1px #fff;
 }
+
 #results .serviceRequests ul li img{
   float:right;
   width:75px;
@@ -205,12 +247,15 @@ ul.nav li {
   padding:10px;
   max-height:40px;
 }
+
 #results .serviceRequests .paging .prev{
   float:left;
 }
+
 #results .serviceRequests .paging .next{
   float:right;
 }
+
 #results .serviceRequests .paging .pagecount{ 
   margin:auto;
   width:85px;
@@ -219,6 +264,7 @@ ul.nav li {
 #sidebar img.toomany{ 
   margin:17px;
 }
+
 #sidebar div.nubbin{ 
   background:url(/assets/img/nubbin.png);
   position:absolute;
@@ -227,6 +273,7 @@ ul.nav li {
   width:33px;
   height:34px;
 }
+
 #content{ 
   position:absolute;
   right:0px;
@@ -236,13 +283,14 @@ ul.nav li {
   overflow:auto;
   -webkit-transition: left 0.5s ease-in-out;
   -webkit-transition-delay: 0.1s;
-
 }
+
 #content.sidebar{
   left:215px;
   -webkit-transition: all 0.5s ease-in-out;
   -webkit-transition-delay: 0.3s;
-} 
+}
+
 #map{ 
   position:absolute;
   right:0px;
@@ -251,34 +299,46 @@ ul.nav li {
   left:0px;
 }
 
-#barnav{ 
-
-
-
-}
 #barnav ul.nav{ 
   padding:0px;
 }
+
 #barnav ul.nav li{ 
   float:inherit;
   border-right: solid 2px orange;
   padding:30px 0px 5px 10px;
   height:40px;
 }
-#barnav ul li.selected{
+
+#barnav ul li.selected
+{
   background:url(/assets/img/notch.png) -8px 22px;
   border:none;
-} 
+}
+
 #barnav ul li.last{ 
   width:88px;
   height:3000px;
 }
+
 ul.nav li div{
   height:42px;
   width:50px;
   margin:auto;
   background:url(/assets/img/views_icons.png);
   cursor:pointer;
+}
+
+ul.nav li.filters div,
+ul.nav li.map div,
+ul.nav li.list div,
+ul.nav li.graphs div,
+ul.nav li.compare div,
+ul.nav li.browse div {
+  -webkit-transition: margin 0.5s ease-out;
+  -moz-transition: margin 0.5s ease-out;
+  -o-transition: margin 0.5s ease-out;
+  transition: margin 0.5s ease-out;
 }
 
 ul.nav li.filters div{ background-position:50px 0px; }
@@ -288,12 +348,19 @@ ul.nav li.graphs div{ background-position:200px 0px; }
 ul.nav li.compare div{ background-position:150px 0px; }
 ul.nav li.browse div{ background-position:100px 0px; }
 
-ul.nav li.filters.selected div{ background-position:50px 43px; }
-ul.nav li.map.selected div{ background-position:0px 43px; }
-ul.nav li.list.selected div{ background-position:250px 43px; }
-ul.nav li.graphs.selected div{ background-position:200px 43px; }
-ul.nav li.compare.selected div{ background-position:150px 43px; }
-ul.nav li.browse.selected div{ background-position:100px 43px; }
+ul.nav li.filters.selected div { background-position:50px 43px; }
+ul.nav li.map.selected div { background-position:0px 43px; }
+ul.nav li.list.selected div { background-position:250px 43px; }
+ul.nav li.graphs.selected div { background-position:200px 43px; }
+ul.nav li.compare.selected div { background-position:150px 43px; }
+ul.nav li.browse.selected div { background-position:100px 43px; }
+
+ul.nav li.filters:hover div { background-position:50px 41px; }
+ul.nav li.map:hover div { background-position:0px 41px; }
+ul.nav li.list:hover div { background-position:250px 41px; }
+ul.nav li.graphs:hover div { background-position:200px 41px; }
+ul.nav li.compare:hover div { background-position:150px 41px; }
+ul.nav li.browse:hover div { background-position: 100px 41px; }
 
 div#content div#list{ 
   position:absolute;
@@ -309,13 +376,15 @@ div#content div#list table{
   border-bottom:none;
   width:100%;
 }
+
 div#content div#list table th{
   border-bottom:solid 2px #000;
   border-right:solid 1px #d8d8d8;
   height:30px;
   text-align:left;
   padding:5px;
-} 
+}
+
 div#content div#list table td{
   border-right:solid 1px #d8d8d8;
   border-bottom:solid 1px #d8d8d8;;
@@ -323,14 +392,17 @@ div#content div#list table td{
   max-width:250px;
   overflow:auto;
 }
+
 div#content div#list table tr:nth-child(even){ background-color:#eee; }
 div#content div#list table tr:nth-child(odd) { background-color:#fff; }
 div#content div#list{ 
   margin:20px 20px 20px 120px;
 }
+
 td.media{ 
   width:120px;
 }
+
 img.media{ 
   max-width:120px;
 
