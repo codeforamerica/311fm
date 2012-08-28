@@ -17,30 +17,31 @@ function(app) {
     events: {},
 
     afterRender: function(ev){ 
-      //setup leaflet
       var url = 'http://a.tiles.mapbox.com/v3/dmt.map-cdkzgmkx.jsonp';
-
-      // Make a new Leaflet map in your container div
       map = new L.Map('map', {zoomControl:false})  
-
-      // Center the map on Washington, DC, at zoom 15
         .setView(new L.LatLng(37.774, -122.419), 12);
-
-      // Get metadata about the map from MapBox
       wax.tilejson(url, function(tilejson) {
-        // Add MapBox Streets as a base layer
         map.addLayer(new wax.leaf.connector(tilejson));
       });
     },
-
     cleanup: function() {
       app.off(null, null, this);
     },
+    addBoundaries:function(){
+      this.mapBoundaries.clearLayers(); 
+      
+      this.boundaries.each(function(bound){
+        var polygon  = L.Polygon(bound.geometery.coordinates)
+        this.mapBoundaries.addLayer(polygon);
+      });
 
-    initialize: function() {
-
+      this.mapBoundaries.addTo(this.map);
+    },
+    initialize: function(e) {
       app.on("show_filters", function(){$("#content").addClass("sidebar");}, this);
       app.on("show_nav", function(){$("#content").removeClass("sidebar");}, this);
+      this.boundaries = e.boundaries;
+      this.boundaries.on("add", this.addBoundaries, this);
     }  
   });
 

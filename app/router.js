@@ -5,10 +5,10 @@ define([
   "modules/serviceRequest",
   "modules/navigation",
   "modules/map",
-  "modules/list"
+  "modules/list",
+  "modules/boundary"
 ],
-
-       function(app, Filter, ServiceRequest, Navigation, Map, List) {
+function(app, Filter, ServiceRequest, Navigation, Map, List, Boundary) {
 
   // Defining the application router, you can attach sub routers here.
   var Router = Backbone.Router.extend({
@@ -25,7 +25,8 @@ define([
       app.layout.setViews({
         "#content": new Map.Views.Map({
           serviceRequests:this.serviceRequests,
-          filters:this.filters
+          filters:this.filters,
+          boundaries:this.boundaries
         })
       }).render();
       app.trigger("view_change", {view:"map"});
@@ -49,9 +50,9 @@ define([
     initialize: function(){
       app.filters = this.filters = new Filter.Collection();
       this.serviceRequests = new ServiceRequest.Collection();
+      this.boundaries = new Boundary.Collection();
       app.useLayout("main").render();
 
-      //these should be a collection
       app.layout.setViews({
         "#searchBox": new Filter.Views.Search({
           collection: this.filters
@@ -97,7 +98,8 @@ define([
       }else if(ev.view == "map"){
         loadview  = new Map.Views.Map({
           serviceRequests:this.serviceRequests,
-          filters:this.filters
+          filters:this.filters,
+          boundaries:this.boundaries
         });
       }
       app.layout.setView("#content", loadview).render();
