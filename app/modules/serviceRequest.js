@@ -17,7 +17,7 @@ function(app) {
     model: ServiceRequest.Model,
 
     sync: function(method, collection, options){
-      var url = "http://open311proxy.herokuapp.com/open311/v2/requests.json"
+      var url = "http://open311proxy.herokuapp.com/open311/v2/requests.json";
 
       if(method == "read"){
         $.ajax(url, {data:options.data, 
