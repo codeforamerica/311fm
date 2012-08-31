@@ -51,6 +51,7 @@ function(app, Filter, ServiceRequest, Navigation, Map, List, Boundary) {
       app.filters = this.filters = new Filter.Collection();
       this.serviceRequests = new ServiceRequest.Collection();
       this.boundaries = new Boundary.Collection();
+
       app.useLayout("main").render();
 
       app.layout.setViews({

@@ -19,7 +19,7 @@ function(app) {
     model: Boundary.Model,
     sync: function(method, collection, options){
       collection.reset()
-      var url = "/assets/data/sf_boundaries.json"
+      var url = "/assets/js/data/sf_neighborhoods.json"
 
       if(method == "read"){
         $.ajax(url, {data:options.data, 
