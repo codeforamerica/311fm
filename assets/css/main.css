@@ -53,8 +53,8 @@ div.clear{
   margin-top: 5px;
   padding-left: 5px;
   -webkit-box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.5);
- -moz-box-shadow: inset 0 2px 3px rgba(0,0,0,0.5);
- box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: inset 0 2px 3px rgba(0,0,0,0.5);
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.5);
 }
 
 #header #searchBox .btn{
@@ -335,10 +335,10 @@ ul.nav li.list div,
 ul.nav li.graphs div,
 ul.nav li.compare div,
 ul.nav li.browse div {
-  -webkit-transition: margin 0.5s ease-out;
-  -moz-transition: margin 0.5s ease-out;
-  -o-transition: margin 0.5s ease-out;
-  transition: margin 0.5s ease-out;
+  -webkit-transition: margin 0.1s ease-out;
+  -moz-transition: margin 0.1s ease-out;
+  -o-transition: margin 0.1s ease-out;
+  transition: margin 0.1s ease-out;
 }
 
 ul.nav li.filters div{ background-position:50px 0px; }
@@ -348,19 +348,14 @@ ul.nav li.graphs div{ background-position:200px 0px; }
 ul.nav li.compare div{ background-position:150px 0px; }
 ul.nav li.browse div{ background-position:100px 0px; }
 
-ul.nav li.filters.selected div { background-position:50px 43px; }
-ul.nav li.map.selected div { background-position:0px 43px; }
-ul.nav li.list.selected div { background-position:250px 43px; }
-ul.nav li.graphs.selected div { background-position:200px 43px; }
-ul.nav li.compare.selected div { background-position:150px 43px; }
-ul.nav li.browse.selected div { background-position:100px 43px; }
+ul.nav li.filters.selected div, ul.nav li.filters:hover div { background-position:50px 43px; }
+ul.nav li.map.selected div, ul.nav li.map:hover div { background-position:0px 43px; }
+ul.nav li.list.selected div, ul.nav li.list:hover div { background-position:250px 43px; }
+ul.nav li.graphs.selected div, ul.nav li.graphs:hover div { background-position:200px 43px; }
+ul.nav li.compare.selected div, ul.nav li.compare:hover div { background-position:150px 43px; }
+ul.nav li.browse.selected div, ul.nav li.browse:hover div { background-position:100px 43px; }
 
-ul.nav li.filters:hover div { background-position:50px 41px; }
-ul.nav li.map:hover div { background-position:0px 41px; }
-ul.nav li.list:hover div { background-position:250px 41px; }
-ul.nav li.graphs:hover div { background-position:200px 41px; }
-ul.nav li.compare:hover div { background-position:150px 41px; }
-ul.nav li.browse:hover div { background-position: 100px 41px; }
+ul.nav li:hover div { margin-top:-4px; margin-bottom: 4px; }
 
 div#content div#list{ 
   position:absolute;
