@@ -306,7 +306,7 @@ ul.nav li {
 #barnav ul.nav li{ 
   float:inherit;
   border-right: solid 2px orange;
-  padding:30px 0px 5px 10px;
+  padding:30px 0px 5px;
   height:40px;
 }
 
@@ -317,7 +317,7 @@ ul.nav li {
 }
 
 #barnav ul li.last{ 
-  width:88px;
+  width:98px;
   height:3000px;
 }
 
