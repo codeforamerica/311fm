@@ -4,7 +4,7 @@ div.clear{
 }
 
 #header{ 
-  height:50px;
+  height:66px;
   background:#2b77ab url('/assets/img/nav_pattern.jpg') repeat;
   color:#eeeeee;
   font-size:24px;
@@ -20,7 +20,7 @@ div.clear{
 
 #header ul.links{ 
   float:right;
-  margin: 7px 20px 0px 0px;
+  margin: 12px 20px 0px 0px;
   padding:0px;
 }
 
@@ -28,7 +28,7 @@ div.clear{
   float:left;
   padding:10px;
   color:#fff;
-  font-size:12px;
+  font-size:14px;
   list-style:none;
 }
 
@@ -43,6 +43,7 @@ div.clear{
 
 #header #searchBox{ 
   float:right;
+  margin-top: 4px;
 }
 
 #header #searchBox input{
