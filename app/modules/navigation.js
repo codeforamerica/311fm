@@ -32,9 +32,6 @@ function(app) {
     afterRender:function(){
       //TODO fix super hack - Mick
       $(this.el).find("li."+this.selected).addClass("selected");
-
-      console.log("HEREEREEREERE")
-
     },
     navigationChange: function(ev){ 
       //check which one

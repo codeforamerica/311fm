@@ -14,7 +14,14 @@ function(app) {
 
   // Default collection.
   Filter.Collection = Backbone.Collection.extend({
-    model: Filter.Model
+    model: Filter.Model,
+    addOrSet:function(name, value){
+      var filters = this.where({name:name});
+      if(filters.length > 0)
+        filters[0].set("value", value);
+      else
+        this.add({name:name, value:value});
+    }
   });
 
   Filter.Views.Search = Backbone.View.extend({

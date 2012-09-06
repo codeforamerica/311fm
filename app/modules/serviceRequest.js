@@ -19,22 +19,24 @@ function(app) {
       var params = {};
       for( m in app.filters.models){
         var filter = app.filters.models[m];
-        
-        console.log(filter);
         params[filter.get("name")] = filter.get("value");
       }
       return params;
     },
     sync: function(method, collection, options){
-      collection.reset()
-      var url = "http://open311proxy.herokuapp.com/open311/v2/requests.json"
-      console.log("filters",options.data, this.filterParams())
+      collection.reset();
+      var filterParams = this.filterParams();
+      if(!filterParams["jurisdiction_id"]){
+        return;
+      }
+      var url = "http://open311proxy.herokuapp.com/open311/"+filterParams["jurisdiction_id"]+"/requests.json"
+
       if(method == "read"){
-        $.ajax(url, {data:_.extend(this.filterParams(), options.data), 
+        $.ajax(url, {data:_.extend(filterParams, options.data), 
           dataType:"jsonp",
           success:function(data) {
-            collection.add(data);
-            collection.trigger("change");
+            collection.add(data, {silent:true});
+            collection.trigger("add");
           },
           error:function(err,b,c) {
             console.log(err,b,c);
