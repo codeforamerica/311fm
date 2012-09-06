@@ -114,7 +114,7 @@ function(app) {
         });
       }
       
-      var polygon  = new L.MultiPolygon(points, {stroke:true, color:"#03f", weight:2, fill:true});
+      var polygon  = new L.MultiPolygon(points, {stroke:true, color:"#333", weight:4, fill:false});
       polygon.bindPopup(city.get("name"));
       polygon.addTo(this.map)
       
