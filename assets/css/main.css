@@ -274,6 +274,11 @@ ul.nav li {
   height:34px;
 }
 
+#sidebar div.nubbin:hover{
+  background-position:0px 34px;
+  cursor: pointer;
+}
+
 #content{ 
   position:absolute;
   right:0px;
