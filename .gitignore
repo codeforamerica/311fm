@@ -1,5 +1,5 @@
 *.psd
 dist
-data
+/data
 .DS_Store
 
