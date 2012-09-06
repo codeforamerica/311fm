@@ -38,7 +38,7 @@ function(app) {
 
     enterSearch: function(ev){
         if(ev.keyCode == 13)
-            findLocation();
+            this.findLocation();
     },
 
     findLocation: function(ev) {

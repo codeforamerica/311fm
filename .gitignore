@@ -1,3 +1,5 @@
 *.psd
 dist
 data
+.DS_Store
+

@@ -11,18 +11,18 @@ function(app, Filter) {
   describe("test Search View", function() {
 
     // XXX: does not work as expected
-    xit("instantiating without model object throws exception", function() {
+    it("instantiating without model object throws exception", function() {
 
       // create new view with no model object - this throws
       // because view attempts to wire events to model object
       // but can't because it is undefined
-      var searchView = new Filter.Views.Search();
+      //var searchView = new Filter.Views.Search();
       
       // // but we never reach this because the error happened above.
-      expect(searchView).toThrow();
+      //expect(searchView).toThrow();
 
-      // // this does not work either
-      // expect(new Filter.Views.Search()).toThrow();
+      // // this does not work either      
+      expect( function() { new Filter.Views.Search(); } ).toThrow();
 
     });
 
