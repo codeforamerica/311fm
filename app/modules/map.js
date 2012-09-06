@@ -32,8 +32,10 @@ function(app) {
       console.log("zoom",this.map.getZoom());
       if(this.map.getZoom() > 12){
         this.citiesGroup.clearLayers();
+        this.renderRequests();
       }else{
         this.changeCities();
+        this.srGroup.clearLayers();
       }
     },
     cleanup: function() {
@@ -148,6 +150,7 @@ function(app) {
       this.serviceRequests.on("add", this.renderRequests, this);
       this.serviceRequests.on("reset", this.clearRequests, this);
       this.mapBoundaries = new L.LayerGroup();
+      this.srGroup = new L.FeatureGroup();
       this.boundaries = e.boundaries;
       this.boundaries.on("add", this.changeBoundaries, this);
       this.cities = e.cities;
