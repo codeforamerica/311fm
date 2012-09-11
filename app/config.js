@@ -14,7 +14,6 @@ require.config({
     lodash: "../assets/js/libs/lodash",
     backbone: "../assets/js/libs/backbone",
     handlebars: "../assets/js/libs/handlebars"
-
   },
 
   shim: {
@@ -23,13 +22,8 @@ require.config({
       deps: ["lodash", "jquery"],
       exports: "Backbone"
     },
-
+    
     // Backbone.LayoutManager depends on Backbone.
     "plugins/backbone.layoutmanager": ["backbone", "handlebars"]
-  },
-  leaflet: { 
-    exports: "Leaflet"
   }
-
-
 });

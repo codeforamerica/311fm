@@ -1,7 +1,6 @@
 define([
   // Application.
-  "app",
-
+  "app"
 ],
 
 // Map dependencies from above array.
@@ -15,7 +14,7 @@ function(app) {
     tagName:"div",
     id:"map",
     events: {},
-
+    firstLoad:true,
     afterRender: function(ev){ 
       var url = 'http://a.tiles.mapbox.com/v3/dmt.map-cdkzgmkx.jsonp';
       var self = this;
@@ -25,7 +24,13 @@ function(app) {
         self.map.addLayer(new wax.leaf.connector(tilejson));
       });
       this.map.on("zoomend",this.zoomChanged, this);
+      
 
+      this.map.addControl(new L.Control.Center({click:function(){
+        self.firstLoad = true;
+        self.changeCities();
+      }}));
+      this.map.addControl(new L.Control.Zoom());      
       //this.boundaries.fetch();
     },
     zoomChanged:function(){
@@ -67,15 +72,25 @@ function(app) {
       if(this.citiesGroup){
         this.citiesGroup.clearLayers();
       }
+      var self = this;
       var markers = [];
+      var latLngs = [];
       this.cities.each(function(city){
-        markers.push(new L.Marker([city.get('lat'), city.get('lng')], {cityName:city.get("name")} ));
+        latLngs.push([city.get('lat'), city.get('lng')]);
+        markers.push(new L.Marker([city.get('lat'), city.get('lng')], {cityName:city.get("name"), icon:self.cityIcon} ));
       });
 
 
       this.citiesGroup = new L.FeatureGroup(markers)
         .on("click", this.cityClick, this)
         .addTo(this.map);
+
+
+      if(this.firstLoad){
+        var bounds = new L.LatLngBounds(latLngs);
+        this.map.fitBounds(bounds);
+        this.firstLoad = false;
+      }
 
     },
     cityClick:function(ev ){
@@ -124,7 +139,7 @@ function(app) {
     renderRequests:function(){
       var markers = [];
       this.serviceRequests.each(function(sr){
-        var marker = new L.Marker([sr.get('lat'), sr.get('long')], {service_request_id:sr.get("service_request_id")} );
+        var  marker = new L.Marker([sr.get('lat'), sr.get('long')], {service_request_id:sr.get("service_request_id")} );
         marker.bindPopup(sr.get("service_name"));
         markers.push(marker);
       });
@@ -156,6 +171,16 @@ function(app) {
       this.cities = e.cities;
       this.cities.on("add", this.changeCities, this);
       this.cities.fetch();
+      this.cityIcon = new L.icon({
+        iconUrl: '/assets/img/markers/city-icon.png',
+        iconSize: [40, 40],
+        iconAnchor: [20, 40],
+        popupAnchor: [-3, -12],
+        shadowUrl: '/assets/img/markers/city-icon-shadow.png',
+        shadowSize: [40, 40],
+        shadowAnchor: [20, 40]
+      });
+
     }  
   });
 
