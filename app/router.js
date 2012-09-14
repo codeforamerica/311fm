@@ -7,9 +7,13 @@ define([
   "modules/map",
   "modules/list",
   "modules/boundary",
-  "modules/city"
+  "modules/city",
+  "modules/graphs",
+  "modules/compare",
+  "modules/browse",
+  "modules/stats"
 ],
-function(app, Filter, ServiceRequest, Navigation, Map, List, Boundary, City) {
+function(app, Filter, ServiceRequest, Navigation, Map, List, Boundary, City, Graphs, Compare, Browse, Stat) {
 
   // Defining the application router, you can attach sub routers here.
   var Router = Backbone.Router.extend({
@@ -17,20 +21,14 @@ function(app, Filter, ServiceRequest, Navigation, Map, List, Boundary, City) {
       "": "index",
       "map": "map",
       "list": "list",
-      "graphs": "graphs"
+      "graphs": "graphs",
+      "compare": "compare",
+      "browse": "browse"
     },
     index: function() {
       this.map();
     },
     map: function(){
-      app.layout.setViews({
-        "#content": new Map.Views.Map({
-          serviceRequests:this.serviceRequests,
-          filters:this.filters,
-          boundaries:this.boundaries,
-          cities:this.cities
-        })
-      }).render();
       app.trigger("view_change", {view:"map"});
     },
     list: function(){
@@ -43,19 +41,34 @@ function(app, Filter, ServiceRequest, Navigation, Map, List, Boundary, City) {
       app.trigger("view_change", {view:"list"});
     },
     graphs: function(){
-      app.layout.setView("#content", new List.Views.List({
+      app.layout.setView("#content", new Graphs.Views.Graphs({
         serviceRequests:this.serviceRequests,
         filters:this.filters
       })).render();
       app.trigger("view_change", {view:"graphs"});
+    },
+    compare: function(){
+      app.layout.setView("#content", new Compare.Views.Compare({
+        serviceRequests:this.serviceRequests,
+        filters:this.filters,
+        stats:this.stats
+      })).render();
+      app.trigger("view_change", {view:"compare"});
+    },
+    browse: function(){
+      app.layout.setView("#content", new Browse.Views.Browse({
+        serviceRequests:this.serviceRequests,
+        filters:this.filters
+      })).render();
+      app.trigger("view_change", {view:"browse"});
     },
     initialize: function(){
       app.filters = this.filters = new Filter.Collection();
       this.serviceRequests = new ServiceRequest.Collection();
       this.boundaries = new Boundary.Collection();
       this.cities = new City.Collection();
-
-      app.useLayout("main").render();
+      this.stats =  new Stat.Collection();
+      app.useLayout("main");
 
       app.layout.setViews({
         "#searchBox": new Filter.Views.Search({
@@ -70,24 +83,16 @@ function(app, Filter, ServiceRequest, Navigation, Map, List, Boundary, City) {
           collection: this.filters,
         })
 
-      });
+      }).render();
       app.on("view_change", this.handleViewChanged, this);
       this.filters.on("add", function(){
-        console.log(" on add reset service requests")
         this.serviceRequests.fetch();
-
       }, this);
       this.filters.on("change", function(){
-
-        console.log(" on change reset service requests")
         this.serviceRequests.fetch();
-
       }, this);
       this.filters.on("remove", function(){
-
-        console.log(" on change reset service requests")
         this.serviceRequests.fetch();
-
       }, this);
 
     },
@@ -105,6 +110,22 @@ function(app, Filter, ServiceRequest, Navigation, Map, List, Boundary, City) {
           filters:this.filters,
           boundaries:this.boundaries,
           cities:this.cities
+        });
+      }else if(ev.view == "compare"){
+        loadview  = new Compare.Views.Compare({
+          serviceRequests:this.serviceRequests,
+          filters:this.filters,
+          stats:this.stats
+        });
+      }else if(ev.view == "graphs"){
+        loadview  = new Graphs.Views.Graphs({
+          serviceRequests:this.serviceRequests,
+          filters:this.filters
+        });
+      }else if(ev.view == "browse"){
+        loadview  = new Browse.Views.Browse({
+          serviceRequests:this.serviceRequests,
+          filters:this.filters
         });
       }
       app.layout.setView("#content", loadview).render();
