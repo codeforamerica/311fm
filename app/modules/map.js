@@ -35,7 +35,7 @@ function(app) {
     },
     zoomChanged:function(){
       console.log("zoom",this.map.getZoom());
-      if(this.map.getZoom() > 12){
+      if(this.map.getZoom() > 10){
         this.citiesGroup.clearLayers();
         this.renderRequests();
       }else{
@@ -76,15 +76,15 @@ function(app) {
       var markers = [];
       var latLngs = [];
       this.cities.each(function(city){
-        latLngs.push([city.get('lat'), city.get('lng')]);
-        markers.push(new L.Marker([city.get('lat'), city.get('lng')], {cityName:city.get("name"), icon:self.cityIcon} ));
+        if(city.get("supports_json")){
+          latLngs.push([city.get('lat'), city.get('lng')]);
+          markers.push(new L.Marker([city.get('lat'), city.get('lng')], {cityName:city.get("name"), icon:self.cityIcon} ));
+        }
       });
-
 
       this.citiesGroup = new L.FeatureGroup(markers)
         .on("click", this.cityClick, this)
         .addTo(this.map);
-
 
       if(this.firstLoad){
         var bounds = new L.LatLngBounds(latLngs);
@@ -96,7 +96,7 @@ function(app) {
     cityClick:function(ev ){
       console.log("cityclick",ev.layer.options.cityName);
       var city = this.cities.where({name:ev.layer.options.cityName})[0];
-      ev.target._map.setView(ev.layer.getLatLng(), 13);
+      ev.target._map.setView(ev.layer.getLatLng(), 11);
       this.cityBounds(city);
       app.filters.addOrSet("jurisdiction_id", city.get("jurisdiction_id"));
     },
@@ -138,10 +138,13 @@ function(app) {
     },
     renderRequests:function(){
       var markers = [];
+      var self = this;
       this.serviceRequests.each(function(sr){
-        var  marker = new L.Marker([sr.get('lat'), sr.get('long')], {service_request_id:sr.get("service_request_id")} );
-        marker.bindPopup(sr.get("service_name"));
-        markers.push(marker);
+        if(sr.get('lat')){
+          var  marker = new L.Marker([sr.get('lat'), sr.get('long')], {service_request_id:sr.get("service_request_id")} );
+          marker.bindPopup(self.popupForRequest(sr.toJSON()));
+          markers.push(marker);
+        }
       });
 
       if(!this.srGroup){
@@ -151,6 +154,30 @@ function(app) {
         this.srGroup.addLayer(markers[m]);
       }
       this.srGroup.addTo(this.map);
+
+    },
+    popupForRequest: function (request) {
+      // TODO: need some sort of templating support here
+      //var boundaryText = request.boundary ? ("<br/>" + request.boundary) : "";
+
+      var parsedDate = new Date(request.requested_datetime);
+
+      var content = "<h2>" + request.service_name + "</h2>";
+
+      if (request.media_url && request.media_url !== "") {
+        content = content.concat('<div class="photo">' + '<a href="'+request.media_url+'" target="_blank">' +
+                                 '<img src="'+request.media_url+'" alt="request img" height="250" width="250" />' +
+                                 '</a></div>'
+                                );
+      }
+
+      content += "<div class='content'><h4>Address</h4><p>" + request.address + "</p>" +
+        "<h4>Description</h4><p>" + request.description + "</p>" +
+      //  "<h4>Created</h4><p>" + dateTools.formatDate(parsedDate) +
+      //  " - <span class='ago'>"+dateTools.timeSpanString(parsedDate) + " ago</span></p>" + 
+        (request.status === "closed" ? "<h5>CLOSED</h5>" : "") + "</div><div class='reset'></div>";
+
+      return content;
 
     },
     clearRequests:function(){

@@ -26,6 +26,7 @@ function(app) {
     sync: function(method, collection, options){
       collection.reset();
       var filterParams = this.filterParams();
+      filterParams.page_size = 100;
       if(!filterParams["jurisdiction_id"]){
         return;
       }
