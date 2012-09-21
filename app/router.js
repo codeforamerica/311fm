@@ -48,11 +48,12 @@ function(app, Filter, ServiceRequest, Navigation, Map, List, Boundary, City, Gra
       app.trigger("view_change", {view:"graphs"});
     },
     compare: function(){
-      app.layout.setView("#content", new Compare.Views.Compare({
+      var view = new Compare.Views.Compare({
         serviceRequests:this.serviceRequests,
         filters:this.filters,
         stats:this.stats
-      })).render();
+      });
+      app.layout.setView("#content", view).render();
       app.trigger("view_change", {view:"compare"});
     },
     browse: function(){
@@ -80,7 +81,7 @@ function(app, Filter, ServiceRequest, Navigation, Map, List, Boundary, City, Gra
         "#subnav": new Navigation.Views.SubNav({
         }),
         "#filters": new Filter.Views.Controls({
-          collection: this.filters,
+          collection: this.filters
         })
 
       }).render();
@@ -99,6 +100,7 @@ function(app, Filter, ServiceRequest, Navigation, Map, List, Boundary, City, Gra
     handleViewChanged: function(ev){
       console.log("view changed", ev);
       var loadview;
+
       if(ev.view == "list"){
         loadview  = new List.Views.List({
           serviceRequests:this.serviceRequests,

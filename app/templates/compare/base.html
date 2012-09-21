@@ -1,6 +1,31 @@
-<div>Compare page coming soon..</div>
-
-<div>
-  <div id="leftMap"></div>
-  <div id="rightMap"></div>
+<div class="row">	
+	<div class="span3">
+		<p>Pick two areas to compare:</p>
+	</div>
+	<div class="span3">		
+		<select id="slAreaA">
+			{{#each areas}}
+		  <option value={{this}}>{{this}}</option>
+		  {{/each}}
+		</select>
+  </div>
+  <div class="span1">
+  	<p>vs</p>
+  </div>
+  <div class="span3">
+  	<select id="slAreaB">
+			{{#each areas}}
+		  <option value={{this}}>{{this}}</option>
+		  {{/each}}
+    </select>  
+	</div>
 </div>
+
+<div class="row">
+	<div class="span5 areaA"></div>
+	<div class="span5 areaB"></div>
+</div>
+
+<!-- <div>
+  <button id="btnCompare" type="button">COMPARE</button>	
+</div> -->
