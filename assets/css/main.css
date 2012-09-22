@@ -283,7 +283,7 @@ ul.nav li {
   position:absolute;
   right:0px;
   bottom:0px;
-  top:48px;
+  top:74px;
   left:0px;  
   overflow:auto;
   -webkit-transition: left 0.5s ease-in-out;
@@ -406,4 +406,30 @@ td.media{
 img.media{ 
   max-width:120px;
 
+}
+
+/******** Adjust leafet controls ***********/
+.leaflet-top { 
+  top:0px;
+}
+.leaflet-left {
+  left:110px;
+}
+div.leaflet-control-center{
+  height:46px;
+  width:46px;
+}
+a.leaflet-control-center{
+  height:46px;
+  width:46px;
+  display:block;
+  position:relative;
+  left:-9px;
+  top:5px;
+  background-image: url(/assets/img/center.png);
+  background-position: 0px 0px;
+}
+
+#compare,#browse,#graphs{ 
+  margin-left:120px;
 }
