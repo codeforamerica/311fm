@@ -433,3 +433,31 @@ a.leaflet-control-center{
 #compare,#browse,#graphs{ 
   margin-left:120px;
 }
+
+/******** Adjust leafet popup ***********/
+.leaflet-container a.leaflet-popup-close-button {
+  padding: 10px 10px 0 0;
+}
+
+.leaflet-popup-content-wrapper {
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  }
+
+.leaflet-popup-content {
+  font-size: 14px;
+}
+
+.leaflet-popup-content h4,
+.leaflet-popup-content h5 {
+  margin: 0;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+}
+
+.leaflet-popup-content p {
+  line-height: 18px;
+  -webkit-margin-before: 0.5em;
+}
+

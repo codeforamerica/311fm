@@ -175,7 +175,7 @@ function(app) {
         "<h4>Description</h4><p>" + request.description + "</p>" +
       //  "<h4>Created</h4><p>" + dateTools.formatDate(parsedDate) +
       //  " - <span class='ago'>"+dateTools.timeSpanString(parsedDate) + " ago</span></p>" + 
-        (request.status === "closed" ? "<h5>CLOSED</h5>" : "") + "</div><div class='reset'></div>";
+        (request.status === "closed" ? "<h5>CLOSED</h5>" : "") + "</div><div class='clear'></div>";
 
       return content;
 
