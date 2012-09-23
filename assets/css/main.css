@@ -17,6 +17,16 @@ div.clear{
   top:0px;
   z-index:101;
 }
+#header img{ 
+  float:left;
+}
+#header #cityName{ 
+  float:left;
+  margin-top:32px;
+  font-size:22px;
+  color:#eee;
+  margin-left:8px;
+}
 
 #header ul.links{ 
   float:right;

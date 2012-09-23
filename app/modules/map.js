@@ -24,6 +24,7 @@ function(app) {
         self.map.addLayer(new wax.leaf.connector(tilejson));
       });
       this.map.on("zoomend",this.zoomChanged, this);
+      this.map.on("moveend",this.mapMoved, this);
       
 
       this.map.addControl(new L.Control.Center({click:function(){
@@ -32,6 +33,22 @@ function(app) {
       }}));
       this.map.addControl(new L.Control.Zoom());      
       //this.boundaries.fetch();
+    },
+    mapMoved:function(){
+      var latlng = this.map.getCenter();
+
+      var city = this.cities.endpointByLocation(latlng);
+      if(city){
+        this.cityBounds(city);
+        app.filters.addOrSet("jurisdiction_id", city.get("jurisdiction_id"));
+      }else{
+        this.clearCityBounds();
+        var f = app.filters.where({name:"jurisdiction_id"})
+        if(f.length > 0){
+          app.filters.remove(f);
+        }
+      }
+      app.trigger("city_changed", city);
     },
     zoomChanged:function(){
       console.log("zoom",this.map.getZoom());
@@ -100,9 +117,15 @@ function(app) {
       this.cityBounds(city);
       app.filters.addOrSet("jurisdiction_id", city.get("jurisdiction_id"));
     },
-    cityBounds:function(city){
+    clearCityBounds: function(){
+      if(this.cityPolygon){
+        this.map.removeLayer(this.cityPolygon)
+      }
+    },
+    cityBounds:function(city){   
+      this.clearCityBounds();
       var p = city.get("polygon");
-
+      
       var points = [];
       var count = 0;
       if(!p){
@@ -131,9 +154,9 @@ function(app) {
         });
       }
       
-      var polygon  = new L.MultiPolygon(points, {stroke:true, color:"#333", weight:4, fill:false});
-      polygon.bindPopup(city.get("name"));
-      polygon.addTo(this.map)
+      this.cityPolygon  = new L.MultiPolygon(points, {stroke:true, color:"#333", weight:4, fill:false});
+      this.cityPolygon.bindPopup(city.get("name"));
+      this.cityPolygon.addTo(this.map)
       
     },
     renderRequests:function(){
@@ -158,7 +181,7 @@ function(app) {
     },
     popupForRequest: function (request) {
       // TODO: need some sort of templating support here
-      //var boundaryText = request.boundary ? ("<br/>" + request.boundary) : "";
+      // var boundaryText = request.boundary ? ("<br/>" + request.boundary) : "";
 
       var parsedDate = new Date(request.requested_datetime);
 
@@ -180,6 +203,12 @@ function(app) {
       return content;
 
     },
+    setLocation:function(geocode){
+      this.map.fitBounds([
+        [geocode.geometry.bounds.sw.lat, geocode.geometry.bounds.sw.lng],
+        [geocode.geometry.bounds.ne.lat, geocode.geometry.bounds.ne.lng]
+      ]);
+    },
     clearRequests:function(){
       if(this.srGroup){
         this.srGroup.clearLayers();
@@ -188,6 +217,7 @@ function(app) {
     initialize: function(e) {
       app.on("show_filters", function(){$("#content").addClass("sidebar");}, this);
       app.on("show_nav", function(){$("#content").removeClass("sidebar");}, this);
+      app.on("location_change", this.setLocation, this);
       this.serviceRequests = e.serviceRequests;
       this.serviceRequests.on("add", this.renderRequests, this);
       this.serviceRequests.on("reset", this.clearRequests, this);

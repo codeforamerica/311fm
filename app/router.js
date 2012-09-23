@@ -94,7 +94,12 @@ function(app, Filter, ServiceRequest, Navigation, Map, List, Boundary, City, Gra
       this.filters.on("remove", function(){
         this.serviceRequests.fetch();
       }, this);
-
+      app.on("city_changed", function(city){
+        if(city)
+          $("#cityName").html(city.get("name"));
+        else
+          $("#cityName").html("");
+      }, this);
     },
     handleViewChanged: function(ev){
       console.log("view changed", ev);
