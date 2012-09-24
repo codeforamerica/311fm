@@ -1,1 +1,79 @@
-<h1>test</h1>
+<br />
+
+<div class="span12">
+
+	<div class="row compare-counts">	
+		<div class="span5">
+			<div class="row">
+			  <span class="area-name">WARD: {{modelA_ward}}</span>
+			</div>
+			<br />
+			<div class="row">
+			  <div class="span2"><span>OPENED</span></div>  
+			  <div class="span2"><span>CLOSED</span></div>
+			</div>
+			<div class="row">
+			  <div class="span2" id="underline-opened-closed"></div>
+			  <div class="span2" id="underline-opened-closed"></div>
+			</div>
+			<div class="row bump-down">
+			  <div class="span2"><span class="big-red-text">{{modelA_stats.opened_requests}}</span></div>
+			  <div class="span2"><span class="big-blue-text">{{modelA_stats.closed_requests}}</span></div>
+		  </div>
+	  </div>
+		<div class="span5">
+			<div class="row">
+			  <span class="area-name">WARD: {{modelB_ward}}</span>
+			</div>
+			<br />
+			<div class="row">
+			  <div class="span2"><span>OPENED</span></div>  
+			  <div class="span2"><span>CLOSED</span></div>
+			</div>
+			<div class="row">
+			  <div class="span2" id="underline-opened-closed"></div>
+			  <div class="span2" id="underline-opened-closed"></div>
+			</div>
+			<div class="row bump-down">
+			  <div class="span2"><span class="big-red-text">{{modelB_stats.opened_requests}}</span></div>
+			  <div class="span2"><span class="big-blue-text">{{modelB_stats.closed_requests}}</span></div>
+		  </div>
+	  </div>	  
+	</div>	
+
+  <div class="row offset2">
+		<div class="row">
+		  <div class="span2 big-stat">{{modelA_stats.tardy_requests}}</div>
+		  <div class="span3">
+		  	<img class="siren" src="/assets/img/img_trans.gif" width="1" height="1" /><br />
+		  	<div class="stat-desc"># of service requests open for over a month</div>
+		  </div>
+		  <div class="span2 big-stat">{{modelB_stats.tardy_requests}}</div>
+		</div>
+		<hr />
+		<div class="row">
+		  <div class="span2 big-stat">{{modelA_avgDays}}</div>
+		  <div class="span3">
+		  	<img class="ticket" src="/assets/img/img_trans.gif" width="1" height="1" />
+		  	<div class="stat-desc">Average # of days to close a service request</div>
+		  </div>
+		  <div class="span2 big-stat">{{modelB_avgDays}}</div>
+		</div>
+		<hr />
+		<div class="row">
+		  <div class="span2 big-stat">{{modelA_stats.tardy_requests}}</div>
+		  <div class="span3">
+		  	<img class="clock" src="/assets/img/img_trans.gif" width="1" height="1" />
+		  	<div class="stat-desc">Time of day when service requests are usually closed</div>
+		  </div>
+		  <div class="span2 big-stat">{{modelB_stats.tardy_requests}}</div>
+		</div>	
+		<hr />
+		<div class="row">
+		  <div class="span2 big-stat">{{modelA_stats.tardy_requests}}</div>
+		  <div class="span3"><img class="cal" src="/assets/img/img_trans.gif" width="1" height="1" /></div>
+		  <div class="span2 big-stat">{{modelB_stats.tardy_requests}}</div>
+		</div>
+  </div>
+
+</div>		

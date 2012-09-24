@@ -433,3 +433,82 @@ a.leaflet-control-center{
 #compare,#browse,#graphs{ 
   margin-left:120px;
 }
+
+
+
+
+
+
+
+img.siren
+{
+  width:130px;
+  height:100px;
+  background:url(/assets/img/compare_icons_x2.jpg) 0 0;
+}
+img.ticket
+{
+  width:170px;
+  height:100px;
+  background:url(/assets/img/compare_icons_x2.jpg) -145px 0;
+}
+img.clock
+{
+  width:120px;
+  height:100px;
+  background:url(/assets/img/compare_icons_x2.jpg) -295px 0;
+}
+img.cal
+{
+  width:120px;
+  height:100px;
+  background:url(/assets/img/compare_icons_x2.jpg) -440px 0;
+}
+.big-blue-text {  
+  font-size: 50px;
+  font-weight:900;
+  color: #5093cc;
+}
+.big-red-text {  
+  font-size: 50px;
+  font-weight:900;
+  color: #af3215;
+}
+.big-stat {
+  margin-top: 50px;
+  font-size: 50px;
+  font-weight:900;
+}
+.stat-desc {
+  margin-left: -20px;
+  width: 190px;
+  font-weight:900;
+  text-align: center;
+}
+.compare {
+  padding-left: 20px;
+}
+.compare-counts {
+  margin-left: 60px;
+}
+.compare.area-picker {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 15px;
+  background:url(/assets/img/sidebar_header_background.png);
+}
+.area-name {
+  margin-left: 15px;
+  font-size: 50px;
+}
+#underline-opened-closed {
+  border: 1px solid;
+  border-color: gray;
+  background-color: gray;
+  width: 110px;
+  margin-right:28px;
+}
+.bump-down {
+  height: 80px;
+  margin-top: 20px;
+}
