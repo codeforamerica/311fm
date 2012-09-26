@@ -424,7 +424,6 @@ img.media{
 div#content div#browse{
   margin-top: 20px;
 }
-
 #browse .request-item{ 
   width:240px;
   height:260px;
@@ -437,21 +436,36 @@ div#content div#browse{
   display: none;
   background:#fff;
   color: #ffffff;
-  padding:5px;
+  padding:15px;
 } 
 #browse .request-item:hover .info.closed{
   background: #af3215;
-  color: white;
 }
 #browse .request-item:hover .info.open{
   background: #5093cc;
 }
-
+#browse .request-item:hover .info.submitted{
+  background: #00BE7C;
+}
 #browse .request-item:hover .info{
   opacity:.9;
-  height: 250px;
+  height: 230px;
   display: inherit;
   background:inherit;
+}
+#browse .request-item:hover .requesttype{
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 22px;
+  margin-bottom: 20px;
+}
+#browse .request-item:hover .date {
+  font-style: italic;
+}
+#browse .request-item:hover .status {
+  margin-top: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 /******** Adjust leafet controls ***********/
