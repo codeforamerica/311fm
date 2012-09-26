@@ -460,6 +460,7 @@ div#content div#browse{
 }
 #browse .request-item:hover .description{
   font-size: 14px;
+  line-height: 17px;
 }
 #browse .request-item:hover .location {
   margin-top: 10px;
