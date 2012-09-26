@@ -443,3 +443,14 @@ a.leaflet-control-center{
 #compare,#browse,#graphs{ 
   margin-left:120px;
 }
+
+
+#browse .request-item{ 
+  width:180px;
+  height:200px;
+  border:solid 1px #ccc;
+  margin:5px;
+  display:block;
+  background:no-repeat;
+  float:left;
+}
