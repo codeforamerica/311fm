@@ -19,8 +19,6 @@ function(app) {
       console.log(response);
     },
 
-    initialize: function() {},
-
     _ready: function() {
       if (undefined !== this.get("stats")) {
         return true;
@@ -33,6 +31,51 @@ function(app) {
       if (this._ready()) {
         return Math.round(this.get("stats").days_to_close_requests_avg);
       }
+    },
+
+    mostFrequentTime: function() {
+      if (this._ready()) {
+        var stats = this.get("stats");
+        var timeCounts = [
+          {name: "Morning", frequency: stats.request_time_bins.morning},
+          {name: "Afternoon", frequency: stats.request_time_bins.afternoon},
+          {name: "Night", frequency: stats.request_time_bins.night}
+        ];
+        var max = _.max(timeCounts, function(timeCount) {return timeCount.frequency;});
+        if (max) {
+          return max.name;
+        }
+        return "";
+      }
+    },
+
+    mostFrequentDay: function() {
+      if (this._ready()) {
+        var stats = this.get("stats");
+        var dayCounts = [
+          {name: "Saturday", frequency: stats.request_time_bins.days.saturday},
+          {name: "Sunday", frequency: stats.request_time_bins.days.sunday},
+          {name: "Monday", frequency: stats.request_time_bins.days.monday},
+          {name: "Tuesday", frequency: stats.request_time_bins.days.tuesday},
+          {name: "Wednesday", frequency: stats.request_time_bins.days.wednesday},
+          {name: "Thursday", frequency: stats.request_time_bins.days.thursday},
+          {name: "Friday", frequency: stats.request_time_bins.days.friday}
+        ];
+        var max = _.max(dayCounts, function(dayCount) {return dayCount.frequency;});
+        if (max) {
+          return max.name;
+        }
+        return "";
+      }
+    },
+
+    topRequests: function(n) {
+      if (this._ready()) {
+        var stats = this.get("stats");
+        return _.first(stats.request_counts, n);
+      }
+
+      return [{},{},{},{},{}];
     }
   });
 
@@ -41,15 +84,21 @@ function(app) {
     id: "area",
 
     serialize: function () {
-      //console.log(this.model);
+      console.log(this.model);
 
       return {
         modelA_ward: this.model.modelA.get("ward"),
         modelA_stats: this.model.modelA.get("stats"),
         modelA_avgDays: this.model.modelA.avgDaysToCloseRequests(),
+        modelA_freqTime: this.model.modelA.mostFrequentTime(),
+        modelA_freqDay: this.model.modelA.mostFrequentDay(),
         modelB_ward: this.model.modelB.get("ward"),
         modelB_stats: this.model.modelB.get("stats"),
-        modelB_avgDays: this.model.modelB.avgDaysToCloseRequests()
+        modelB_avgDays: this.model.modelB.avgDaysToCloseRequests(),
+        modelB_freqTime: this.model.modelB.mostFrequentTime(),
+        modelB_freqDay: this.model.modelB.mostFrequentDay(),
+        modelA_top5Requests: this.model.modelA.topRequests(5),
+        modelB_top5Requests: this.model.modelB.topRequests(5)
       };
     },
 
@@ -72,7 +121,6 @@ function(app) {
  
     events: {
       "change #slAreaA" : function(e) {
-        console.log(e.currentTarget.value);
         this.modelA.url = "http://freaky-mustard-data.herokuapp.com/api/v1/" +
           e.currentTarget.value +
           "/summary?start=2004-09-01&end=2012-09-12&callback=?";
