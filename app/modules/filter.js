@@ -43,10 +43,18 @@ function(app) {
 
     findLocation: function(ev) {
       var model = this.model;
-      console.log($el.find("#search").val());
+      var url= "https://api.foursquare.com/v2/venues/explore";
+      var self =this;
+      $.ajax(url, {dataType:"jsonp", 
+                   data:{client_id: "05JK2J5ZZ1XKAH5AN1CL1ZQNOGJFVA0YD00FG154D2P5XDF4",
+                         client_secret: "J3XOISHZ5VKS3C5U1RPYW2C4JID5FRWX1KSSJNPZKPBJIGIF",
+                         limit:1,
+                         near: this.$el.find("#search").val()}, success:function(data){
 
-      //do search, and trigger add location event
-      //app.router.go("org", org, "user", name);
+                           //if they enter a neighborhood we know then it should add that as a filter.
+                           // otherwise just move the map
+                           app.trigger("location_change", data.response.geocode);
+                   }});
     },
 
     cleanup: function() {

@@ -17,6 +17,16 @@ div.clear{
   top:0px;
   z-index:101;
 }
+#header img{ 
+  float:left;
+}
+#header #cityName{ 
+  float:left;
+  margin-top:32px;
+  font-size:22px;
+  color:#eee;
+  margin-left:8px;
+}
 
 #header ul.links{ 
   float:right;
@@ -435,6 +445,27 @@ a.leaflet-control-center{
 }
 
 /******** Adjust leafet popup ***********/
+
+#browse .request-item{ 
+  width:180px;
+  height:200px;
+  border:solid 1px #ccc;
+  margin:5px;
+  display:block;
+  background:no-repeat #333;
+  float:left;
+}
+#browse .request-item .info{
+  opacity:0.6;
+  background:#fff;
+  padding:5px;
+} 
+#browse .request-item:hover .info{
+  opacity:1;
+  color:#fff;
+  background:inherit;
+}
+
 .leaflet-container a.leaflet-popup-close-button {
   padding: 10px 10px 0 0;
 }
@@ -460,4 +491,3 @@ a.leaflet-control-center{
   line-height: 18px;
   -webkit-margin-before: 0.5em;
 }
-

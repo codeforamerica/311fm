@@ -9,6 +9,50 @@ function(app) {
   // Create a new module.
   var Map = app.module();
 
+
+  // Contour object
+  function Contour(a) {
+    this.pts = a || []; // an array of Point objects defining the contour
+    return this;
+  }
+
+
+  Contour.prototype.area = function() {
+    var area=0;
+    var pts = this.pts;
+    var nPts = pts.length;
+    var j=nPts-1;
+    var p1; var p2;
+
+    for (var i=0;i<nPts;j=i++) {
+      p1=pts[i]; p2=pts[j];
+      area+=p1.x*p2.y;
+      area-=p1.y*p2.x;
+    }
+    area/=2;
+    return area;
+  };
+
+  Contour.prototype.centroid = function() {
+    var pts = this. pts;
+    var nPts = pts.length;
+    var x=0; var y=0;
+    var f;
+    var j=nPts-1;
+    var p1; var p2;
+
+    for (var i=0;i<nPts;j=i++) {
+      p1=pts[i]; p2=pts[j];
+      f=p1.x*p2.y-p2.x*p1.y;
+      x+=(p1.x+p2.x)*f;
+      y+=(p1.y+p2.y)*f;
+    }
+
+    f=this.area()*6;
+    return {x: x/f,y:y/f};
+  };
+
+
   Map.Views.Map = Backbone.View.extend({
 
     tagName:"div",
@@ -24,6 +68,7 @@ function(app) {
         self.map.addLayer(new wax.leaf.connector(tilejson));
       });
       this.map.on("zoomend",this.zoomChanged, this);
+      this.map.on("moveend",this.mapMoved, this);
       
 
       this.map.addControl(new L.Control.Center({click:function(){
@@ -31,7 +76,19 @@ function(app) {
         self.changeCities();
       }}));
       this.map.addControl(new L.Control.Zoom());      
-      //this.boundaries.fetch();
+      if(this.cities.length > 0){
+        this.changeCities();
+      }
+    },
+    mapMoved:function(){
+      var latlng = this.map.getCenter();
+
+      var city = this.cities.endpointByLocation(latlng);
+      if(city){
+        this.cityBounds(city);
+        app.filters.addOrSet("jurisdiction_id", city.get("jurisdiction_id"));
+        app.trigger("city_changed", city);
+      }
     },
     zoomChanged:function(){
       console.log("zoom",this.map.getZoom());
@@ -100,9 +157,15 @@ function(app) {
       this.cityBounds(city);
       app.filters.addOrSet("jurisdiction_id", city.get("jurisdiction_id"));
     },
-    cityBounds:function(city){
+    clearCityBounds: function(){
+      if(this.cityPolygon){
+        this.map.removeLayer(this.cityPolygon)
+      }
+    },
+    cityBounds:function(city){   
+      this.clearCityBounds();
       var p = city.get("polygon");
-
+      
       var points = [];
       var count = 0;
       if(!p){
@@ -131,14 +194,20 @@ function(app) {
         });
       }
       
-      var polygon  = new L.MultiPolygon(points, {stroke:true, color:"#333", weight:4, fill:false});
-      polygon.bindPopup(city.get("name"));
-      polygon.addTo(this.map)
+      this.cityPolygon  = new L.MultiPolygon(points, {stroke:true, color:"#333", weight:4, fill:false});
+      this.cityPolygon.bindPopup(city.get("name"));
+      this.cityPolygon.addTo(this.map)
       
     },
     renderRequests:function(){
+      if(this.map.getZoom() <= 10)
+        return;
+      
       var markers = [];
       var self = this;
+
+      
+
       this.serviceRequests.each(function(sr){
         if(sr.get('lat')){
           var  marker = new L.Marker([sr.get('lat'), sr.get('long')], {service_request_id:sr.get("service_request_id")} );
@@ -158,7 +227,7 @@ function(app) {
     },
     popupForRequest: function (request) {
       // TODO: need some sort of templating support here
-      //var boundaryText = request.boundary ? ("<br/>" + request.boundary) : "";
+      // var boundaryText = request.boundary ? ("<br/>" + request.boundary) : "";
 
       var parsedDate = new Date(request.requested_datetime);
 
@@ -180,6 +249,12 @@ function(app) {
       return content;
 
     },
+    setLocation:function(geocode){
+      this.map.fitBounds([
+        [geocode.geometry.bounds.sw.lat, geocode.geometry.bounds.sw.lng],
+        [geocode.geometry.bounds.ne.lat, geocode.geometry.bounds.ne.lng]
+      ]);
+    },
     clearRequests:function(){
       if(this.srGroup){
         this.srGroup.clearLayers();
@@ -188,16 +263,16 @@ function(app) {
     initialize: function(e) {
       app.on("show_filters", function(){$("#content").addClass("sidebar");}, this);
       app.on("show_nav", function(){$("#content").removeClass("sidebar");}, this);
+      app.on("location_change", this.setLocation, this);
       this.serviceRequests = e.serviceRequests;
       this.serviceRequests.on("add", this.renderRequests, this);
-      this.serviceRequests.on("reset", this.clearRequests, this);
       this.mapBoundaries = new L.LayerGroup();
       this.srGroup = new L.FeatureGroup();
       this.boundaries = e.boundaries;
       this.boundaries.on("add", this.changeBoundaries, this);
       this.cities = e.cities;
+
       this.cities.on("add", this.changeCities, this);
-      this.cities.fetch();
       this.cityIcon = new L.icon({
         iconUrl: '/assets/img/markers/city-icon.png',
         iconSize: [40, 40],
@@ -207,7 +282,6 @@ function(app) {
         shadowSize: [40, 40],
         shadowAnchor: [20, 40]
       });
-
     }  
   });
 

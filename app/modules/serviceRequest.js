@@ -24,25 +24,52 @@ function(app) {
       return params;
     },
     sync: function(method, collection, options){
-      collection.reset();
       var filterParams = this.filterParams();
-      filterParams.page_size = 100;
-      if(!filterParams["jurisdiction_id"]){
-        return;
-      }
-      var url = "http://open311proxy.herokuapp.com/open311/"+filterParams["jurisdiction_id"]+"/requests.json"
+      filterParams.page_size = 200;
+      
+      if(!options.data)
+        options.data = {};
 
       if(method == "read"){
-        $.ajax(url, {data:_.extend(filterParams, options.data), 
-          dataType:"jsonp",
-          success:function(data) {
-            collection.add(data, {silent:true});
-            collection.trigger("add");
-          },
-          error:function(err,b,c) {
-            console.log(err,b,c);
+        collection.reset();
+        app.cities.each(function(city){
+          var dataType = "xml";
+          if(city.get("supports_json"))
+            dataType = "json";
+          if(city.get("include_jurisdiction_id"))
+            options.data.jurisdiction_id = city.get("jurisdiction_id");
+          else{
+            delete options.data.jurisdiction_id;
+            delete filterParams.jurisdiction_id;
           }
-        }, "json");
+          var url = "http://open311proxy.herokuapp.com/open311/"+city.get("jurisdiction_id")+"/requests."+dataType;
+          $.ajax(url, {data:_.extend(filterParams, options.data),
+                       dataType:dataType,
+                       success:function(data) {
+                         
+                         if(typeof(data).toString() == "Array"){
+                           
+                         }else{
+                           var requests
+                           var r =  $(data).find("request");
+                           //r.
+
+                         }
+
+
+                         for(d in data){
+                           data[d].city = city.get("name");
+                         }
+                         collection.add(data, {silent:true});
+                         collection.trigger("add");
+                       },
+                       error:function(err,b,c) {
+                         console.log(err,b,c);
+                       }
+                      });
+
+
+        });
       }
     }
   });

@@ -37,6 +37,9 @@ function(app) {
       //check which one
       var view = $(ev.target).closest("li").attr("class").replace(" selected", "");
 
+      if(view === "last")
+        return;
+      
       if(view == "filters")
         app.trigger("show_filters");
       else{

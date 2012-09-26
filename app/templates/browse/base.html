@@ -1,3 +1,12 @@
-<div>
-  Browse page coming soon...
+{{#each serviceRequests}}
+<div class="request-item" style="background-image:url('{{this.media_url}}')">
+  <div class="info">
+    <div class="requesttype">{{this.service_name}}</div>
+    <div class="description">{{this.decription}}</div>
+    <div class="location">{{this.city}}</div>
+    <div class="date">{{this.requested_datetime}}</div>
+    <div class="status">{{this.status}}</div>
+  </div>
 </div>
+{{/each}}  
+
