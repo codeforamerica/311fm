@@ -417,6 +417,42 @@ img.media{
   max-width:120px;
 
 }
+#compare,#browse,#graphs{ 
+  margin-left:120px;
+}
+
+div#content div#browse{
+  margin-top: 20px;
+}
+
+#browse .request-item{ 
+  width:240px;
+  height:260px;
+  margin:10px;
+  display:block;
+  background:no-repeat #333;
+  float:left;
+}
+#browse .request-item .info{
+  display: none;
+  background:#fff;
+  color: #ffffff;
+  padding:5px;
+} 
+#browse .request-item:hover .info.closed{
+  background: #af3215;
+  color: white;
+}
+#browse .request-item:hover .info.open{
+  background: #5093cc;
+}
+
+#browse .request-item:hover .info{
+  opacity:.9;
+  height: 250px;
+  display: inherit;
+  background:inherit;
+}
 
 /******** Adjust leafet controls ***********/
 .leaflet-top { 
@@ -440,31 +476,7 @@ a.leaflet-control-center{
   background-position: 0px 0px;
 }
 
-#compare,#browse,#graphs{ 
-  margin-left:120px;
-}
-
 /******** Adjust leafet popup ***********/
-
-#browse .request-item{ 
-  width:180px;
-  height:200px;
-  border:solid 1px #ccc;
-  margin:5px;
-  display:block;
-  background:no-repeat #333;
-  float:left;
-}
-#browse .request-item .info{
-  opacity:0.6;
-  background:#fff;
-  padding:5px;
-} 
-#browse .request-item:hover .info{
-  opacity:1;
-  color:#fff;
-  background:inherit;
-}
 
 .leaflet-container a.leaflet-popup-close-button {
   padding: 10px 10px 0 0;
