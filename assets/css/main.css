@@ -444,6 +444,56 @@ img.media{
   max-width:120px;
 
 }
+#compare,#browse,#graphs{ 
+  margin-left:120px;
+}
+
+div#content div#browse{
+  margin-top: 20px;
+}
+#browse .request-item{ 
+  width:240px;
+  height:260px;
+  margin:10px;
+  display:block;
+  background:no-repeat #333;
+  float:left;
+}
+#browse .request-item .info{
+  display: none;
+  background:#fff;
+  color: #ffffff;
+  padding:15px;
+} 
+#browse .request-item:hover .info.closed{
+  background: #af3215;
+}
+#browse .request-item:hover .info.open{
+  background: #5093cc;
+}
+#browse .request-item:hover .info.submitted{
+  background: #00BE7C;
+}
+#browse .request-item:hover .info{
+  opacity:.9;
+  height: 230px;
+  display: inherit;
+  background:inherit;
+}
+#browse .request-item:hover .requesttype{
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 22px;
+  margin-bottom: 20px;
+}
+#browse .request-item:hover .date {
+  font-style: italic;
+}
+#browse .request-item:hover .status {
+  margin-top: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
 
 /******** Adjust leafet controls ***********/
 .leaflet-top { 
@@ -467,27 +517,30 @@ a.leaflet-control-center{
   background-position: 0px 0px;
 }
 
-#compare,#browse,#graphs{ 
-  margin-left:120px;
+/******** Adjust leafet popup ***********/
+
+.leaflet-container a.leaflet-popup-close-button {
+  padding: 10px 10px 0 0;
 }
 
+.leaflet-popup-content-wrapper {
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  }
 
-#browse .request-item{ 
-  width:180px;
-  height:200px;
-  border:solid 1px #ccc;
-  margin:5px;
-  display:block;
-  background:no-repeat #333;
-  float:left;
+.leaflet-popup-content {
+  font-size: 14px;
 }
-#browse .request-item .info{
-  opacity:0.6;
-  background:#fff;
-  padding:5px;
-} 
-#browse .request-item:hover .info{
-  opacity:1;
-  color:#fff;
-  background:inherit;
+
+.leaflet-popup-content h4,
+.leaflet-popup-content h5 {
+  margin: 0;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+}
+
+.leaflet-popup-content p {
+  line-height: 18px;
+  -webkit-margin-before: 0.5em;
 }

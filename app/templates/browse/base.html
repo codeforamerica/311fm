@@ -1,6 +1,6 @@
 {{#each serviceRequests}}
 <div class="request-item" style="background-image:url('{{this.media_url}}')">
-  <div class="info">
+  <div class="info {{this.status}}">
     <div class="requesttype">{{this.service_name}}</div>
     <div class="description">{{this.decription}}</div>
     <div class="location">{{this.city}}</div>
