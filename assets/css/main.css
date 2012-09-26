@@ -451,6 +451,16 @@ a.leaflet-control-center{
   border:solid 1px #ccc;
   margin:5px;
   display:block;
-  background:no-repeat;
+  background:no-repeat #333;
   float:left;
+}
+#browse .request-item .info{
+  opacity:0.6;
+  background:#fff;
+  padding:5px;
+} 
+#browse .request-item:hover .info{
+  opacity:1;
+  color:#fff;
+  background:inherit;
 }
