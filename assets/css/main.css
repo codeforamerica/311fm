@@ -420,7 +420,6 @@ img.media{
 #compare,#browse,#graphs{ 
   margin-left:120px;
 }
-
 div#content div#browse{
   margin-top: 20px;
 }
@@ -457,7 +456,13 @@ div#content div#browse{
   font-weight: bold;
   font-size: 20px;
   line-height: 22px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+}
+#browse .request-item:hover .description{
+  font-size: 14px;
+}
+#browse .request-item:hover .location {
+  margin-top: 10px;
 }
 #browse .request-item:hover .date {
   font-style: italic;
