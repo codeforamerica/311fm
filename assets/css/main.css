@@ -314,6 +314,33 @@ ul.nav li {
   left:0px;
 }
 
+.city-icon{ 
+  width:100px;
+}
+.city-icon .poll{ 
+  height:65px;
+  width:12px;
+  background:url('/assets/img/markers/city-icon-poll.png');
+}
+.city-icon .flag{ 
+  height:26px;
+  color:#fff;
+  float:left;
+  position:absolute;
+  top:8px;
+  left:4px;
+  padding:2px 20px 0px 5px;
+  background:url('/assets/img/markers/city-icon-flag.png') top right no-repeat;
+}
+.city-icon .shadow{ 
+  width:57px;
+  height:59px;
+  position:absolute;
+  top:8px;
+  left:-42px;
+  background:url('/assets/img/markers/city-icon-shadow.png') top left no-repeat;
+}
+
 #barnav ul.nav{ 
   padding:0px;
 }

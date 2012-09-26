@@ -133,9 +133,17 @@ function(app) {
       var markers = [];
       var latLngs = [];
       this.cities.each(function(city){
+        var cityIcon = L.divIcon({className: 'city-icon',
+                                  iconAnchor:[5, 60],
+                                  iconSize:[150,50],
+                                  html:"<div class='poll'></div>"+
+                                  "<div class='flag'>"+city.get("name").split(",")[0]+"</div>"+
+                                  "<div class='shadow'></div>"
+                                 });
+
         if(city.get("supports_json")){
           latLngs.push([city.get('lat'), city.get('lng')]);
-          markers.push(new L.Marker([city.get('lat'), city.get('lng')], {cityName:city.get("name"), icon:self.cityIcon} ));
+          markers.push(new L.Marker([city.get('lat'), city.get('lng')], {cityName:city.get("name"), icon:cityIcon} ));
         }
       });
 
@@ -273,7 +281,9 @@ function(app) {
       this.cities = e.cities;
 
       this.cities.on("add", this.changeCities, this);
-      this.cityIcon = new L.icon({
+
+
+/*      this.cityIcon = new L.icon({
         iconUrl: '/assets/img/markers/city-icon.png',
         iconSize: [40, 40],
         iconAnchor: [20, 40],
@@ -281,7 +291,7 @@ function(app) {
         shadowUrl: '/assets/img/markers/city-icon-shadow.png',
         shadowSize: [40, 40],
         shadowAnchor: [20, 40]
-      });
+      });*/
     }  
   });
 
