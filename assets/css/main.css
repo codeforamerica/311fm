@@ -326,10 +326,11 @@ ul.nav li {
   height:26px;
   color:#fff;
   float:left;
+  font-weight: bold;
   position:absolute;
   top:8px;
   left:4px;
-  padding:2px 20px 0px 5px;
+  padding:2px 20px 0px 12px;
   background:url('/assets/img/markers/city-icon-flag.png') top right no-repeat;
 }
 .city-icon .shadow{ 
