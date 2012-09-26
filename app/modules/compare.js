@@ -75,8 +75,25 @@ function(app) {
         return _.first(stats.request_counts, n);
       }
 
-      return [{},{},{},{},{}];
+      return _.range(n);
+    },
+
+    topRequestsPercentages: function(n) {
+      var ret = _.range(n);
+
+      if (this._ready()) {
+        var stats = this.get("stats");
+        var counts = _.first(_.pluck(stats.request_counts, 'count'), n);
+        var sum = _.reduce(counts, function(memo, num) { return memo + num; }, 0);
+        if (0 === sum) {
+          return ret;
+        }
+        ret = _.map(counts, function(num) { return Math.round((num / sum) * 100); });
+      }
+
+      return ret;
     }
+
   });
 
   Compare.Views.Area = Backbone.View.extend({
@@ -98,7 +115,9 @@ function(app) {
         modelB_freqTime: this.model.modelB.mostFrequentTime(),
         modelB_freqDay: this.model.modelB.mostFrequentDay(),
         modelA_top5Requests: this.model.modelA.topRequests(5),
-        modelB_top5Requests: this.model.modelB.topRequests(5)
+        modelB_top5Requests: this.model.modelB.topRequests(5),
+        modelA_top5RequestPercentages: this.model.modelA.topRequestsPercentages(5),
+        modelB_top5RequestPercentages: this.model.modelB.topRequestsPercentages(5)
       };
     },
 
