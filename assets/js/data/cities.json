@@ -3,14 +3,16 @@
   "jurisdiction_id":"sfgov.org",
   "lat":37.7808, 
   "lng":-122.418,
-  "supports_json":false
+  "supports_json":false,
+  "include_jurisdiction_id":true
 },
 {"name":"Washington D.C.",
   "endpoint":"http://app.311.dc.gov/cwi/Open311/v2/",
   "jurisdiction_id":"dc.gov",
   "lat":38.893,
   "lng":-77.037,
-  "supports_json":false
+  "supports_json":false,
+  "include_jurisdiction_id":true
 },
 {"name":"Boston, MA",
   "endpoint":"https://mayors24.cityofboston.gov/open311/v2/",

@@ -9,6 +9,50 @@ function(app) {
   // Create a new module.
   var Map = app.module();
 
+
+  // Contour object
+  function Contour(a) {
+    this.pts = a || []; // an array of Point objects defining the contour
+    return this;
+  }
+
+
+  Contour.prototype.area = function() {
+    var area=0;
+    var pts = this.pts;
+    var nPts = pts.length;
+    var j=nPts-1;
+    var p1; var p2;
+
+    for (var i=0;i<nPts;j=i++) {
+      p1=pts[i]; p2=pts[j];
+      area+=p1.x*p2.y;
+      area-=p1.y*p2.x;
+    }
+    area/=2;
+    return area;
+  };
+
+  Contour.prototype.centroid = function() {
+    var pts = this. pts;
+    var nPts = pts.length;
+    var x=0; var y=0;
+    var f;
+    var j=nPts-1;
+    var p1; var p2;
+
+    for (var i=0;i<nPts;j=i++) {
+      p1=pts[i]; p2=pts[j];
+      f=p1.x*p2.y-p2.x*p1.y;
+      x+=(p1.x+p2.x)*f;
+      y+=(p1.y+p2.y)*f;
+    }
+
+    f=this.area()*6;
+    return {x: x/f,y:y/f};
+  };
+
+
   Map.Views.Map = Backbone.View.extend({
 
     tagName:"div",
@@ -32,7 +76,9 @@ function(app) {
         self.changeCities();
       }}));
       this.map.addControl(new L.Control.Zoom());      
-      //this.boundaries.fetch();
+      if(this.cities.length > 0){
+        this.changeCities();
+      }
     },
     mapMoved:function(){
       var latlng = this.map.getCenter();
@@ -41,14 +87,8 @@ function(app) {
       if(city){
         this.cityBounds(city);
         app.filters.addOrSet("jurisdiction_id", city.get("jurisdiction_id"));
-      }else{
-        this.clearCityBounds();
-        var f = app.filters.where({name:"jurisdiction_id"})
-        if(f.length > 0){
-          app.filters.remove(f);
-        }
+        app.trigger("city_changed", city);
       }
-      app.trigger("city_changed", city);
     },
     zoomChanged:function(){
       console.log("zoom",this.map.getZoom());
@@ -160,8 +200,14 @@ function(app) {
       
     },
     renderRequests:function(){
+      if(this.map.getZoom() <= 10)
+        return;
+      
       var markers = [];
       var self = this;
+
+      
+
       this.serviceRequests.each(function(sr){
         if(sr.get('lat')){
           var  marker = new L.Marker([sr.get('lat'), sr.get('long')], {service_request_id:sr.get("service_request_id")} );
@@ -220,14 +266,13 @@ function(app) {
       app.on("location_change", this.setLocation, this);
       this.serviceRequests = e.serviceRequests;
       this.serviceRequests.on("add", this.renderRequests, this);
-      this.serviceRequests.on("reset", this.clearRequests, this);
       this.mapBoundaries = new L.LayerGroup();
       this.srGroup = new L.FeatureGroup();
       this.boundaries = e.boundaries;
       this.boundaries.on("add", this.changeBoundaries, this);
       this.cities = e.cities;
+
       this.cities.on("add", this.changeCities, this);
-      this.cities.fetch();
       this.cityIcon = new L.icon({
         iconUrl: '/assets/img/markers/city-icon.png',
         iconSize: [40, 40],
@@ -237,7 +282,6 @@ function(app) {
         shadowSize: [40, 40],
         shadowAnchor: [20, 40]
       });
-
     }  
   });
 

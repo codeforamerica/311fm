@@ -66,7 +66,8 @@ function(app, Filter, ServiceRequest, Navigation, Map, List, Boundary, City, Gra
       app.filters = this.filters = new Filter.Collection();
       this.serviceRequests = new ServiceRequest.Collection();
       this.boundaries = new Boundary.Collection();
-      this.cities = new City.Collection();
+      app.cities = this.cities = new City.Collection();
+      this.cities.fetch();
       this.stats =  new Stat.Collection();
       app.useLayout("main");
 
@@ -85,13 +86,7 @@ function(app, Filter, ServiceRequest, Navigation, Map, List, Boundary, City, Gra
 
       }).render();
       app.on("view_change", this.handleViewChanged, this);
-      this.filters.on("add", function(){
-        this.serviceRequests.fetch();
-      }, this);
-      this.filters.on("change", function(){
-        this.serviceRequests.fetch();
-      }, this);
-      this.filters.on("remove", function(){
+      this.cities.on("add", function(){
         this.serviceRequests.fetch();
       }, this);
       app.on("city_changed", function(city){

@@ -23,7 +23,7 @@ function(app) {
       app.off(null, null, this);
     },
     serialize: function(){
-      return {serviceRequests:this.serviceRequests}
+      return {serviceRequests:this.serviceRequests.toJSON()}
     },
     initialize: function(e) {
       this.serviceRequests  = e.serviceRequests;

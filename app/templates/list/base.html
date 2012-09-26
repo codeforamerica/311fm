@@ -9,17 +9,17 @@
     <th class="servicename">Service Name</th>
     <th class="image">Image</th>
     <th class="description">Description</th>
-    <th class="neightborhood">Neighborhood</th>
+    <th class="location">Location</th>
     <th class="status">Status</th>
   </tr>
-  {{#each serviceRequests.models}}
+  {{#each serviceRequests}}
   <tr>
-    <td>{{this.attributes.requested_datetime}}</td>
-    <td>{{this.attributes.service_name}}</td>
-    <td class="media"><img src="{{this.attributes.media_url}}" class="media" /></td>
-    <td>{{this.attributes.description}}</td>
-    <td>{{this.attributes.neighborhood}}</td>
-    <td>{{this.attributes.status}}</td>
+    <td>{{this.requested_datetime}}</td>
+    <td>{{this.service_name}}</td>
+    <td class="media"><img src="{{this.media_url}}" class="media" /></td>
+    <td>{{this.description}}</td>
+    <td>{{this.city}}</td>
+    <td>{{this.status}}</td>
   </tr>
   {{/each}}
 </table>
