@@ -23,7 +23,15 @@ function(app) {
       app.off(null, null, this);
     },
     serialize: function(){
-      return {serviceRequests:this.serviceRequests.toJSON()}
+
+      var with_media = [];
+
+      this.serviceRequests.each(function(sr){
+        if(sr.get("media_url"))
+          with_media.push(sr.toJSON());
+      });
+
+      return {serviceRequests:with_media};
     },
     initialize: function(o) {
       this.filters = o.filters;
