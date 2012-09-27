@@ -93,16 +93,39 @@ function(app) {
 
       return ret;
     }
-
   });
 
   Compare.Views.Area = Backbone.View.extend({
     template: "compare/area",
     id: "area",
 
-    serialize: function () {
-      console.log(this.model);
+    afterRender: function() {
+      var modelAPercentages = this.model.modelA.topRequestsPercentages(5);
+      var modelBPercentages = this.model.modelB.topRequestsPercentages(5);
+      var maximumWidth = 600;
 
+      var modelAWidths = _.map(modelAPercentages, function(num) {
+        return Math.round((num / 100) * maximumWidth);
+      });
+      var modelBWidths = _.map(modelBPercentages, function(num) {
+        return Math.round((num / 100) * maximumWidth);
+      });
+
+      this._adjustChart(".sr-top-1-left", ".sr-top-1-right", modelAWidths, modelBWidths, 0);
+      this._adjustChart(".sr-top-2-left", ".sr-top-2-right", modelAWidths, modelBWidths, 1);
+      this._adjustChart(".sr-top-3-left", ".sr-top-3-right", modelAWidths, modelBWidths, 2);
+      this._adjustChart(".sr-top-4-left", ".sr-top-4-right", modelAWidths, modelBWidths, 3);
+      this._adjustChart(".sr-top-5-left", ".sr-top-5-right", modelAWidths, modelBWidths, 4);
+    },
+
+    _adjustChart: function(leftDivClass, rightDivClass, modelAWidths, modelBWidths, index) {
+      $(leftDivClass).css("width", modelAWidths[index] + "px");
+      $(leftDivClass).css("margin-left", 250-modelAWidths[index] + "px");
+      $(rightDivClass).css("width", modelBWidths[index] + "px");
+      $(rightDivClass).css("margin-right", 220 + (250 - modelBWidths[index]) + "px");
+    },
+
+    serialize: function () {
       return {
         modelA_ward: this.model.modelA.get("ward"),
         modelA_stats: this.model.modelA.get("stats"),
