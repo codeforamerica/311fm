@@ -2,48 +2,50 @@
 
 <div class="span12">
 
+	<div class="vert"></div>
+
 	<div class="row compare-counts">	
 		<div class="span5">
 			<div class="row">
-			  <span class="area-name">WARD: {{modelA_ward}}</span>
+			  <span class="area-name-left">WARD: {{modelA_ward}}</span>
 			</div>
 			<br />
 			<div class="row">
-			  <div class="span2"><span>OPENED</span></div>  
-			  <div class="span2"><span>CLOSED</span></div>
+			  <div class="span2 offset-left open-closed"><span>OPENED</span></div>  
+			  <div class="span2 open-closed"><span>CLOSED</span></div>
 			</div>
 			<div class="row">
-			  <div class="span2" id="underline-opened-closed"></div>
+			  <div class="span2 offset-left" id="underline-opened-closed"></div>
 			  <div class="span2" id="underline-opened-closed"></div>
 			</div>
 			<div class="row bump-down">
-			  <div class="span2"><span class="big-red-text">{{modelA_stats.opened_requests}}</span></div>
+			  <div class="span2 offset-left"><span class="big-red-text">{{modelA_stats.opened_requests}}</span></div>
 			  <div class="span2"><span class="big-blue-text">{{modelA_stats.closed_requests}}</span></div>
 		  </div>
 	  </div>
-		<div class="span5">
+		<div class="span6">
 			<div class="row">
-			  <span class="area-name">WARD: {{modelB_ward}}</span>
+			  <span class="area-name-right">WARD: {{modelB_ward}}</span>
 			</div>
 			<br />
 			<div class="row">
-			  <div class="span2"><span>OPENED</span></div>  
-			  <div class="span2"><span>CLOSED</span></div>
+			  <div class="span2 offset-right open-closed"><span>OPENED</span></div>  
+			  <div class="span2 open-closed"><span>CLOSED</span></div>
 			</div>
 			<div class="row">
-			  <div class="span2" id="underline-opened-closed"></div>
+			  <div class="span2 offset-right" id="underline-opened-closed"></div>
 			  <div class="span2" id="underline-opened-closed"></div>
 			</div>
 			<div class="row bump-down">
-			  <div class="span2"><span class="big-red-text">{{modelB_stats.opened_requests}}</span></div>
+			  <div class="span2 offset-right"><span class="big-red-text">{{modelB_stats.opened_requests}}</span></div>
 			  <div class="span2"><span class="big-blue-text">{{modelB_stats.closed_requests}}</span></div>
 		  </div>
 	  </div>	  
 	</div>	
 
-  <div class="row offset2">
+  <div class="row offset-stats">
 		<div class="row">
-		  <div class="span2 big-stat">{{modelA_stats.tardy_requests}}</div>
+		  <div class="span2 big-stat big-stat-offset-left">{{modelA_stats.tardy_requests}}</div>
 		  <div class="span3">
 		  	<img class="siren" src="/assets/img/img_trans.gif" width="1" height="1" /><br />
 		  	<div class="stat-desc"># of service requests open for over a month</div>
@@ -52,7 +54,7 @@
 		</div>
 		<div id="underline-stat-group"></div>
 		<div class="row">
-		  <div class="span2 big-stat">{{modelA_avgDays}}</div>
+		  <div class="span2 big-stat big-stat-offset-left">{{modelA_avgDays}}</div>
 		  <div class="span3">
 		  	<img class="ticket" src="/assets/img/img_trans.gif" width="1" height="1" />
 		  	<div class="stat-desc">Average # of days to close a service request</div>
@@ -61,7 +63,7 @@
 		</div>
 		<div id="underline-stat-group"></div>
 		<div class="row">
-		  <div class="span2 big-stat-text">{{modelA_freqTime}}</div>
+		  <div class="span2 big-stat-text big-stat-offset-left">{{modelA_freqTime}}</div>
 		  <div class="span3">
 		  	<img class="clock" src="/assets/img/img_trans.gif" width="1" height="1" />
 		  	<div class="stat-desc">Time of day when service requests are usually closed</div>
@@ -70,7 +72,7 @@
 		</div>	
 		<div id="underline-stat-group"></div>
 		<div class="row">
-		  <div class="span2 big-stat-text">{{modelA_freqDay}}</div>
+		  <div class="span2 big-stat-text big-stat-offset-left">{{modelA_freqDay}}</div>
 		  <div class="span3">
 		  	<img class="cal" src="/assets/img/img_trans.gif" width="1" height="1" />
 		  	<div class="stat-desc">Day of week with the most service requests</div>
@@ -84,51 +86,53 @@
   	  <div class="span3 service-requests-title">TOP 5 SERVICE REQUESTS</div>
   	</div>
   	<div id="underline-requests-title"></div>
-  	<div class="row">
-  		<div class="sr-label-left">{{modelA_top5Requests.0.type}}</div>
-  		<div class="sr-label-right">{{modelB_top5Requests.0.type}}</div>
-  	</div>
-  	<div class="row sr-graph">
-  		<div class="sr-top-1-left">{{modelA_top5RequestPercentages.0.}}%</div>
-  		<div class="sr-top">1</div>  		
-  		<div class="sr-top-1-right">{{modelB_top5RequestPercentages.0.}}%</div>
-  	</div>
-  	<div class="row">
-  		<div class="sr-label-left">{{modelA_top5Requests.1.type}}</div>
-  		<div class="sr-label-right">{{modelB_top5Requests.1.type}}</div>
-  	</div>  	
-  	<div class="row sr-graph">
-  		<div class="sr-top-2-left">{{modelA_top5RequestPercentages.1.}}%</div>
-  		<div class="sr-top">2</div>  
-  		<div class="sr-top-2-right">{{modelB_top5RequestPercentages.1.}}%</div>
-  	</div>
-  	<div class="row">
-  		<div class="sr-label-left">{{modelA_top5Requests.2.type}}</div>
-  		<div class="sr-label-right">{{modelB_top5Requests.2.type}}</div>
-  	</div>  	
-  	<div class="row sr-graph">
-  		<div class="sr-top-3-left">{{modelA_top5RequestPercentages.2.}}%</div>
-  		<div class="sr-top">3</div>  
-  		<div class="sr-top-3-right">{{modelB_top5RequestPercentages.2.}}%</div>
-  	</div>
-  	<div class="row">
-  		<div class="sr-label-left">{{modelA_top5Requests.3.type}}</div>
-  		<div class="sr-label-right">{{modelB_top5Requests.3.type}}</div>
-  	</div>  	
-  	<div class="row sr-graph">
-  		<div class="sr-top-4-left">{{modelA_top5RequestPercentages.3.}}%</div>
-  		<div class="sr-top">4</div>  
-  		<div class="sr-top-4-right">{{modelA_top5RequestPercentages.3.}}%</div>
-  	</div>
-  	<div class="row">
-  		<div class="sr-label-left">{{modelA_top5Requests.4.type}}</div>
-  		<div class="sr-label-right">{{modelB_top5Requests.4.type}}</div>
-  	</div>  	
-  	<div class="row sr-graph">
-  		<div class="sr-top-5-left">{{modelA_top5RequestPercentages.4.}}%</div>
-  		<div class="sr-top">5</div>  
-  		<div class="sr-top-5-right">{{modelB_top5RequestPercentages.4.}}%</div>
-  	</div>  	  	
+  	    <div class="offset-divbone">
+		  	<div class="row">
+		  		<div class="sr-label-left">{{modelA_top5Requests.0.type}}</div>
+		  		<div class="sr-label-right">{{modelB_top5Requests.0.type}}</div>
+		  	</div>	  	
+		  	<div class="row sr-graph">
+		  		<div class="sr-top-1-left">{{modelA_top5RequestPercentages.0.}}%</div>
+		  		<div class="sr-top">1</div>  		
+		  		<div class="sr-top-1-right">{{modelB_top5RequestPercentages.0.}}%</div>
+		  	</div>
+		  	<div class="row">
+		  		<div class="sr-label-left">{{modelA_top5Requests.1.type}}</div>
+		  		<div class="sr-label-right">{{modelB_top5Requests.1.type}}</div>
+		  	</div>  	
+		  	<div class="row sr-graph">
+		  		<div class="sr-top-2-left">{{modelA_top5RequestPercentages.1.}}%</div>
+		  		<div class="sr-top">2</div>  
+		  		<div class="sr-top-2-right">{{modelB_top5RequestPercentages.1.}}%</div>
+		  	</div>
+		  	<div class="row">
+		  		<div class="sr-label-left">{{modelA_top5Requests.2.type}}</div>
+		  		<div class="sr-label-right">{{modelB_top5Requests.2.type}}</div>
+		  	</div>  	
+		  	<div class="row sr-graph">
+		  		<div class="sr-top-3-left">{{modelA_top5RequestPercentages.2.}}%</div>
+		  		<div class="sr-top">3</div>  
+		  		<div class="sr-top-3-right">{{modelB_top5RequestPercentages.2.}}%</div>
+		  	</div>
+		  	<div class="row">
+		  		<div class="sr-label-left">{{modelA_top5Requests.3.type}}</div>
+		  		<div class="sr-label-right">{{modelB_top5Requests.3.type}}</div>
+		  	</div>  	
+		  	<div class="row sr-graph">
+		  		<div class="sr-top-4-left">{{modelA_top5RequestPercentages.3.}}%</div>
+		  		<div class="sr-top">4</div>  
+		  		<div class="sr-top-4-right">{{modelA_top5RequestPercentages.3.}}%</div>
+		  	</div>
+		  	<div class="row">
+		  		<div class="sr-label-left">{{modelA_top5Requests.4.type}}</div>
+		  		<div class="sr-label-right">{{modelB_top5Requests.4.type}}</div>
+		  	</div>  	
+		  	<div class="row sr-graph">
+		  		<div class="sr-top-5-left">{{modelA_top5RequestPercentages.4.}}%</div>
+		  		<div class="sr-top">5</div>  
+		  		<div class="sr-top-5-right">{{modelB_top5RequestPercentages.4.}}%</div>
+		  	</div>
+  	  </div>	  	
   </div>  
 
 </div>		

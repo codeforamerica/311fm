@@ -122,7 +122,7 @@ function(app) {
       $(leftDivClass).css("width", modelAWidths[index] + "px");
       $(leftDivClass).css("margin-left", 250-modelAWidths[index] + "px");
       $(rightDivClass).css("width", modelBWidths[index] + "px");
-      $(rightDivClass).css("margin-right", 220 + (250 - modelBWidths[index]) + "px");
+      $(rightDivClass).css("margin-right", 200 + (250 - modelBWidths[index]) + "px");
     },
 
     serialize: function () {

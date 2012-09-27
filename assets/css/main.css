@@ -437,32 +437,33 @@ a.leaflet-control-center{
 
 
 
-
-
-
 img.siren
 {
-  width:130px;
-  height:100px;
-  background:url(/assets/img/compare_icons_x2.jpg) 0 0;
+  margin-left: 40px;
+  width:70px;
+  height:50px;
+  background:url(/assets/img/compare_icons.jpg) 0 0;
 }
 img.ticket
 {
-  width:170px;
-  height:100px;
-  background:url(/assets/img/compare_icons_x2.jpg) -145px 0;
+  margin-left: 35px;
+  width:80px;
+  height:50px;
+  background:url(/assets/img/compare_icons.jpg) -70px 0;
 }
 img.clock
 {
-  width:120px;
-  height:100px;
-  background:url(/assets/img/compare_icons_x2.jpg) -295px 0;
+  margin-left: 43px;
+  width:70px;
+  height:50px;
+  background:url(/assets/img/compare_icons.jpg) -150px 0;
 }
 img.cal
 {
-  width:120px;
-  height:100px;
-  background:url(/assets/img/compare_icons_x2.jpg) -440px 0;
+  margin-left: 43px;
+  width:70px;
+  height:50px;
+  background:url(/assets/img/compare_icons.jpg) -220px 0;
 }
 .big-blue-text {  
   font-size: 50px;
@@ -478,11 +479,17 @@ img.cal
   margin-top: 50px;
   font-size: 50px;
   font-weight:900;
+  text-align: center;
 }
 .big-stat-text {
   margin-top: 50px;
   font-size: 30px;
   font-weight:900;
+  text-align: center;
+}
+.big-stat-offset-left {
+  margin-left: -120px;
+  width: 280px;
 }
 .stat-desc {
   margin-left: -20px;
@@ -493,18 +500,18 @@ img.cal
 .service-requests-title {
   font-size: 15px;
   font-weight:900;
-  margin-left: 150px;
+  margin-left: 185px;
 }
 #underline-requests-title {
   height: 3px;
   background-color: gray;
   width: 480px;
-  margin-left: -10px;
+  margin-left: 25px;
   margin-bottom: 20px;
 }
 #underline-stat-group {
   height: 1px;
-  background-color: gray;
+  background-color: #F0F0F0;
   width: 680px;
   margin-left: -100px;
   margin-top: 10px;
@@ -522,16 +529,22 @@ img.cal
   margin-bottom: 15px;
   background:url(/assets/img/sidebar_header_background.png);
 }
-.area-name {
-  margin-left: 15px;
+.area-name-left {
+  margin-left: -40px;
   font-size: 50px;
+}
+.area-name-right {
+  margin-left: 35px;
+  font-size: 50px;
+}
+.open-closed {
+  font-weight: 900;
 }
 #underline-opened-closed {
   border: 1px solid;
-  border-color: gray;
-  background-color: gray;
-  width: 110px;
-  margin-right:28px;
+  background-color: black;
+  width: 150px;
+  margin-right:55px;
 }
 .bump-down {
   height: 80px;
@@ -545,7 +558,7 @@ img.cal
   font-weight:900;
   float: left;
 }
-.sr-top-1-left { 
+.sr-top-1-left {
   float: left;
   margin-right: 20px;
   height: 18px;
@@ -562,7 +575,7 @@ img.cal
   height: 18px;
   width: 250px;
   background-color: #3496C9;
-  margin-right: 220px;
+  margin-right: 210px;
   color: white;
   font-size: 12px;
   font-weight: 900;  
@@ -587,7 +600,7 @@ img.cal
   width: 220px;
   background-color: #63ABD3;
   color: white;
-  margin-right: 250px;
+  margin-right: 240px;
   font-size: 12px;
   font-weight: 900;  
   padding-left: 2px;  
@@ -611,7 +624,7 @@ img.cal
   width: 200px;
   background-color: #8CC0DE;
   color: white;
-  margin-right: 270px;
+  margin-right: 260px;
   font-size: 12px;
   font-weight: 900;  
   padding-left: 2px;  
@@ -635,7 +648,7 @@ img.cal
   width: 150px;
   background-color: #8CC0DE;
   color: white;
-  margin-right: 320px;
+  margin-right: 310px;
   font-size: 12px;
   font-weight: 900;  
   padding-left: 2px;  
@@ -659,21 +672,22 @@ img.cal
   width: 70px;
   background-color: #C5DFEE;
   color: white;
-  margin-right: 400px;
+  margin-right: 390px;
   font-size: 12px;
   font-weight: 900;  
   padding-left: 2px;  
 }
 .sr-label-left {
   float: left;
-  width: 250px;
+  margin-left: -8px;
+  width: 260px;
   text-align: right;
   font-size: 12px;
   font-weight: 900;
 }
 .sr-label-right {
   float: right;
-  width: 250px;
+  width: 232px;
   text-align: left;
   margin-right: 220px;
   font-size: 12px;
@@ -688,5 +702,28 @@ img.cal
   font-size: 10px;
   font-weight: 900;
   float: right;
+}
+.offset-left {
+  margin-left: -40px;
+  margin-right: 70px;
+}
+.offset-right {
+  margin-left: 40px;
+  margin-right: 70px; 
+}
+.offset-stats {
+  margin-left: 212px;
+}
+.offset-divbone {
+  margin-left: 15px;
+}
+.vert {
+  width: 1px;
+  height: 800px;
+  background-color: #F0F0F0;
+  position: absolute;
+  margin-left: 448px;
+  margin-top: 40px;
+  z-index: -10;
 }
 
