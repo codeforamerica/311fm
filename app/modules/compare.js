@@ -101,7 +101,7 @@ function(app) {
       if (0 === sum) {
         return {};
       }
-      var request = _.find(stats.request_counts, function (count) { return count['type'] === requestType; });
+      var request = _.find(stats.request_counts, function (count) { return count.type === requestType; });
 
       return {percentage: request.count / sum, count: request.count, outOf: sum};
     }
