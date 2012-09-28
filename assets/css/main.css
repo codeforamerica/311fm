@@ -460,7 +460,7 @@ img.clock
 }
 img.cal
 {
-  margin-left: 43px;
+  margin-left: 40px;
   width:70px;
   height:50px;
   background:url(/assets/img/compare_icons.jpg) -220px 0;
@@ -500,9 +500,16 @@ img.cal
 .service-requests-title {
   font-size: 15px;
   font-weight:900;
-  margin-left: 185px;
+  margin-left: 188px;
 }
 #underline-requests-title {
+  height: 3px;
+  background-color: gray;
+  width: 480px;
+  margin-left: 25px;
+  margin-bottom: 20px;
+}
+#underline-compare-requests-title {
   height: 3px;
   background-color: gray;
   width: 480px;
@@ -646,7 +653,7 @@ img.cal
   float: right;
   height: 18px;
   width: 150px;
-  background-color: #8CC0DE;
+  background-color: #B2D5E9;
   color: white;
   margin-right: 310px;
   font-size: 12px;
@@ -687,7 +694,7 @@ img.cal
 }
 .sr-label-right {
   float: right;
-  width: 232px;
+  width: 242px;
   text-align: left;
   margin-right: 220px;
   font-size: 12px;
@@ -715,15 +722,59 @@ img.cal
   margin-left: 212px;
 }
 .offset-divbone {
-  margin-left: 15px;
+  margin-left: 9px;
 }
 .vert {
   width: 1px;
-  height: 800px;
+  height: 1200px;
   background-color: #F0F0F0;
   position: absolute;
   margin-left: 448px;
   margin-top: 40px;
   z-index: -10;
+}
+.whiteout {
+  background-color: white;
+}
+.compare-all-requests {
+  text-align: center;
+}
+.compare-requests-title {
+  font-size: 15px;
+  font-weight:900;
+  margin-left: 140px;
+}
+.compare-all-tagline {
+  margin-left: -220px;
+}
+#compare-service-type {
+  font-size: 18px;
+  font-weight: 900;
+  margin-top: 10px;  
+  margin-left: -222px;
+}
+#slServiceRequest {
+  margin-left: -220px;
+}
+#percentage-left {
+  margin-top: 10px;
+  font-size: 35px;
+  font-weight: 900;
+}
+#percentage-right {
+  margin-top: 10px;
+  font-size: 35px;
+  font-weight: 900;
+  margin-left: -80px;
+}
+#counts-left {
+  margin-left: 18px;
+  margin-top: 8px;
+  font-weight: 900;
+}
+#counts-right {
+  margin-top: 8px;
+  margin-left: -80px;
+  font-weight: 900;  
 }
 

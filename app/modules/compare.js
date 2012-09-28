@@ -92,6 +92,18 @@ function(app) {
       }
 
       return ret;
+    },
+
+    requestPercentageOfTotal: function(requestType) {
+      var stats = this.get("stats");
+      var counts = _.pluck(stats.request_counts, 'count');
+      var sum = _.reduce(counts, function(memo, num) { return memo + num; }, 0);
+      if (0 === sum) {
+        return {};
+      }
+      var request = _.find(stats.request_counts, function (count) { return count['type'] === requestType; });
+
+      return {percentage: request.count / sum, count: request.count, outOf: sum};
     }
   });
 
@@ -122,7 +134,8 @@ function(app) {
       $(leftDivClass).css("width", modelAWidths[index] + "px");
       $(leftDivClass).css("margin-left", 250-modelAWidths[index] + "px");
       $(rightDivClass).css("width", modelBWidths[index] + "px");
-      $(rightDivClass).css("margin-right", 200 + (250 - modelBWidths[index]) + "px");
+      $(rightDivClass).css("margin-right", 210 + (250 - modelBWidths[index]) + "px");
+      $('vert').css("height", 1200);
     },
 
     serialize: function () {
@@ -140,7 +153,9 @@ function(app) {
         modelA_top5Requests: this.model.modelA.topRequests(5),
         modelB_top5Requests: this.model.modelB.topRequests(5),
         modelA_top5RequestPercentages: this.model.modelA.topRequestsPercentages(5),
-        modelB_top5RequestPercentages: this.model.modelB.topRequestsPercentages(5)
+        modelB_top5RequestPercentages: this.model.modelB.topRequestsPercentages(5),
+        modelA_allRequests: this.model.modelA.topRequests(14),
+        modelB_allRequests: this.model.modelB.topRequests(14)
       };
     },
 
@@ -165,14 +180,27 @@ function(app) {
       "change #slAreaA" : function(e) {
         this.modelA.url = "http://freaky-mustard-data.herokuapp.com/api/v1/" +
           e.currentTarget.value +
-          "/summary?start=2004-09-01&end=2012-09-12&callback=?";
+          "/summary?start=2004-09-01&end=2012-12-12&callback=?";
         this.modelA.fetch({success: this.modelA.successCallback, error: this.modelA.errorCallback});
       },
       "change #slAreaB" : function(e) {
         this.modelB.url = "http://freaky-mustard-data.herokuapp.com/api/v1/" +
           e.currentTarget.value +
-          "/summary?start=2004-09-01&end=2012-09-12&callback=?";
+          "/summary?start=2004-09-01&end=2012-12-12&callback=?";
         this.modelB.fetch({success: this.modelB.successCallback, error: this.modelB.errorCallback});
+      },
+      "change #slServiceRequest" : function(e) {
+        var selected = $("#slServiceRequest :selected").text();
+        $('#compare-service-type').text(selected);
+        var modelAPercentage = this.modelA.requestPercentageOfTotal(selected);
+        var modelBPercentage = this.modelB.requestPercentageOfTotal(selected);
+
+        $('#percentage-left').text(Math.round(100 * modelAPercentage.percentage) + '%');
+        $('#percentage-right').text(Math.round(100 * modelBPercentage.percentage) + '%');
+        $('#counts-left').text('(' + modelAPercentage.count + '/' + modelAPercentage.outOf + ')');
+        $('#counts-right').text('(' + modelBPercentage.count + '/' + modelBPercentage.outOf + ')');
+
+
       }
     },
 

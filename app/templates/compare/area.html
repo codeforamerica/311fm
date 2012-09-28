@@ -48,7 +48,7 @@
 		  <div class="span2 big-stat big-stat-offset-left">{{modelA_stats.tardy_requests}}</div>
 		  <div class="span3">
 		  	<img class="siren" src="/assets/img/img_trans.gif" width="1" height="1" /><br />
-		  	<div class="stat-desc"># of service requests open for over a month</div>
+		  	<div class="stat-desc whiteout"># of service requests open for over a month</div>
 		  </div>
 		  <div class="span2 big-stat">{{modelB_stats.tardy_requests}}</div>
 		</div>
@@ -57,7 +57,7 @@
 		  <div class="span2 big-stat big-stat-offset-left">{{modelA_avgDays}}</div>
 		  <div class="span3">
 		  	<img class="ticket" src="/assets/img/img_trans.gif" width="1" height="1" />
-		  	<div class="stat-desc">Average # of days to close a service request</div>
+		  	<div class="stat-desc whiteout">Average # of days to close a service request</div>
 		  </div>
 		  <div class="span2 big-stat">{{modelB_avgDays}}</div>
 		</div>
@@ -66,7 +66,7 @@
 		  <div class="span2 big-stat-text big-stat-offset-left">{{modelA_freqTime}}</div>
 		  <div class="span3">
 		  	<img class="clock" src="/assets/img/img_trans.gif" width="1" height="1" />
-		  	<div class="stat-desc">Time of day when service requests are usually closed</div>
+		  	<div class="stat-desc whiteout">Time of day when service requests are usually closed</div>
 		  </div>
 		  <div class="span2 big-stat-text">{{modelB_freqTime}}</div>
 		</div>	
@@ -75,23 +75,25 @@
 		  <div class="span2 big-stat-text big-stat-offset-left">{{modelA_freqDay}}</div>
 		  <div class="span3">
 		  	<img class="cal" src="/assets/img/img_trans.gif" width="1" height="1" />
-		  	<div class="stat-desc">Day of week with the most service requests</div>
+		  	<div class="stat-desc whiteout">Day of week with the most service requests</div>
 		  </div>		  
 		  <div class="span2 big-stat-text">{{modelB_freqDay}}</div>
 		</div>
   </div>
+  <br />
+  <br />
 
-  <div class="row offset2 bump-down">
+  <div class="row offset2">
   	<div class="row">
   	  <div class="span3 service-requests-title">TOP 5 SERVICE REQUESTS</div>
   	</div>
   	<div id="underline-requests-title"></div>
-  	    <div class="offset-divbone">
+  	  <div class="offset-divbone whiteout">
 		  	<div class="row">
 		  		<div class="sr-label-left">{{modelA_top5Requests.0.type}}</div>
 		  		<div class="sr-label-right">{{modelB_top5Requests.0.type}}</div>
 		  	</div>	  	
-		  	<div class="row sr-graph">
+        <div class="row sr-graph">
 		  		<div class="sr-top-1-left">{{modelA_top5RequestPercentages.0.}}%</div>
 		  		<div class="sr-top">1</div>  		
 		  		<div class="sr-top-1-right">{{modelB_top5RequestPercentages.0.}}%</div>
@@ -133,6 +135,27 @@
 		  		<div class="sr-top-5-right">{{modelB_top5RequestPercentages.4.}}%</div>
 		  	</div>
   	  </div>	  	
-  </div>  
+  </div>
+  <br />
+  <br />
+
+  <div class="row offset2 compare-all-requests">
+	  <div class="row">
+	  	<div class="span4 compare-requests-title whiteout">COMPARE ALL SERVICE REQUESTS</div>
+	  </div>
+	  <div id="underline-compare-requests-title"></div>
+	  <div class="compare-all-tagline whiteout"><strong>Select service requests to compare</strong></div>
+		<select id="slServiceRequest">		
+			{{#each modelA_allRequests}}
+			<option value={{this}}>{{this.type}}</option>
+			{{/each}}
+		</select>
+		<div id="compare-service-type" class="whiteout">Type</div>
+		<div id="percentage-left" class="span4">0%</div>
+		<div id="percentage-right" class="span4">0%</div><br />
+		<div id="counts-left" class="span4">(0/0)</div>
+		<div id="counts-right" class="span4">(0/0)</div>				
+  </div>
+  <br />
 
 </div>		
