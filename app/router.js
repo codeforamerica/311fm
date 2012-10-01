@@ -23,7 +23,8 @@ function(app, Filter, ServiceRequest, Navigation, Map, List, Boundary, City, Gra
       "list": "list",
       "graphs": "graphs",
       "compare": "compare",
-      "browse": "browse"
+      "browse": "browse",
+      "about": "about"
     },
     index: function() {
       this.map();
