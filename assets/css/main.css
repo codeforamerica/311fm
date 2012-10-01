@@ -108,14 +108,15 @@ div.clear{
   font-size:14px;
   background:#fb6900;
   color:#fff;
-  padding:3px 5px;
-  margin:12px 5px 5px 5px;
+  padding:4px 5px;
+  margin:11px 5px 5px 5px;
   border-radius:3px;
   cursor: pointer;
 }
 
 .btn:hover {
   background: #FB3F00;
+  color: #ffffff;
 }
 
 ul.nav{ 
