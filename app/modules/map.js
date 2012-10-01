@@ -239,7 +239,7 @@ function(app) {
 
       var parsedDate = new Date(request.requested_datetime);
 
-      var content = "<h2>" + request.service_name + "</h2>";
+      var content = "<h3>" + request.service_name + "</h3>";
 
       if (request.media_url && request.media_url !== "") {
         content = content.concat('<div class="photo">' + '<a href="'+request.media_url+'" target="_blank">' +

@@ -572,6 +572,11 @@ a.leaflet-control-center{
   font-size: 14px;
 }
 
+.leaflet-popup-content h3 {
+  line-height: 28px;
+  margin-bottom: 18px;
+}
+
 .leaflet-popup-content h4,
 .leaflet-popup-content h5 {
   margin: 0;
