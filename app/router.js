@@ -14,7 +14,7 @@ define([
   "modules/stats",
   "modules/pages"
 ],
-function(app, Filter, ServiceRequest, Navigation, Map, List, Boundary, City, Graphs, Compare, Browse, Stat) {
+function(app, Filter, ServiceRequest, Navigation, Map, List, Boundary, City, Graphs, Compare, Browse, Stat, Pages) {
 
   // Defining the application router, you can attach sub routers here.
   var Router = Backbone.Router.extend({
@@ -33,7 +33,7 @@ function(app, Filter, ServiceRequest, Navigation, Map, List, Boundary, City, Gra
     about: function(){
       app.layout.setViews({
         "#content": new Pages.Views.About()
-      }).render();
+      }).render(function(){$("#subnav").hide();});
     },
     map: function(){
       app.trigger("view_change", {view:"map"});
