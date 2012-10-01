@@ -465,7 +465,7 @@ table {
 }
 
 .table tbody tr:hover td {
-  background-color: none;
+  background-color: #FCD8BE;
 }
 
 td.media{ 
@@ -677,7 +677,7 @@ img.cal
   margin-bottom: 20px;
 }
 .compare {
-  padding-left: 20px;
+  padding-left: 80px;
 }
 .compare-counts {
   margin-left: 60px;
