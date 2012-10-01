@@ -931,3 +931,63 @@ img.cal
   font-weight: 900;  
 }
 
+.about {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.about hr,
+.team hr {
+  margin-top: 0px;
+  border-top: 2px solid #333333;
+}
+
+.about a,
+.jam a {
+  color: #00BE7C;
+}
+
+.jam a {
+  margin-left: 24px;
+}
+
+.jam {
+  display: block;
+  float: left;
+  margin: 0px 40px 50px 0;
+}
+
+.jam img {
+  padding: 10px;
+  background: #ffffff;
+  margin-bottom: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, .4);
+  -moz-box-shadow: 0 0 5px rgba(0, 0, 0, .4);
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, .4);
+}
+
+.jam h4 {
+  font-size: 17px;
+}
+
+.jam li {
+  margin-bottom: 5px;
+}
+
+.twitter,
+.github,
+.email {
+  background: url('/assets/img/social_icons.png') no-repeat;
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.github {
+  background-position: -20px 0px;
+}
+
+.email {
+  background-position: -40px 0px;
+}
+
