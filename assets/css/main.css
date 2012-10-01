@@ -342,6 +342,25 @@ ul.nav li {
   left:-42px;
   background:url('/assets/img/markers/city-icon-shadow.png') top left no-repeat;
 }
+.boundary-icon .cluster-marker{ 
+  min-width:50px;
+  min-height:50px;
+  position:relative;
+  text-align:center;
+  color:#fff;
+}
+.boundary-icon .cluster-marker img{ 
+  width:100%;
+  height:100%;
+  position:absolute;
+  top:0px;
+  left:0px;
+}
+.boundary-icon .cluster-marker .marker-label{ 
+  position:relative;
+  padding-top:13px;
+  
+}
 
 #barnav ul.nav{ 
   padding:0px;

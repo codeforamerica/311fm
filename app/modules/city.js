@@ -25,7 +25,18 @@ function(app) {
         $.ajax(url, {data:options.data, 
           dataType:"json",
           success:function(data) {
-            collection.add(data, {silent:true});
+
+            _.each(data, function(city){
+              
+              if(city.boundary_file){
+                $.ajax("/assets/js/data/"+city.boundary_file, {data:{}, dataType:"json", success:function(ret){
+                  var thecity = collection.where({"jurisdiction_id":city.jurisdiction_id});
+                  thecity[0].set("boundaries", ret);
+                }})
+              }
+              collection.add(city, {silent:true});
+                            
+            });
             collection.trigger("add");
           },
           error:function(err,b,c) {

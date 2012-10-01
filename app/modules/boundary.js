@@ -19,7 +19,7 @@ function(app) {
     model: Boundary.Model,
     sync: function(method, collection, options){
       collection.reset()
-      var url = "/assets/js/data/sf_neighborhoods.json"
+      var url = "/assets/js/data/chicago_boundaries.json"
 
       if(method == "read"){
         $.ajax(url, {data:options.data, 
@@ -33,10 +33,9 @@ function(app) {
           error:function(err,b,c) {
             console.log(err,b,c);
           }
-        }, "json");
+        });
       }
     }
-
   });
 
   // Return the module for AMD compliance.
