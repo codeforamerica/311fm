@@ -11,7 +11,8 @@ define([
   "modules/graphs",
   "modules/compare",
   "modules/browse",
-  "modules/stats"
+  "modules/stats",
+  "modules/pages"
 ],
 function(app, Filter, ServiceRequest, Navigation, Map, List, Boundary, City, Graphs, Compare, Browse, Stat) {
 
@@ -23,10 +24,16 @@ function(app, Filter, ServiceRequest, Navigation, Map, List, Boundary, City, Gra
       "list": "list",
       "graphs": "graphs",
       "compare": "compare",
-      "browse": "browse"
+      "browse": "browse",
+      "about": "about"
     },
     index: function() {
       this.map();
+    },
+    about: function(){
+      app.layout.setViews({
+        "#content": new Pages.Views.About()
+      }).render();
     },
     map: function(){
       app.trigger("view_change", {view:"map"});
