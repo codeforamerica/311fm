@@ -97,7 +97,7 @@ function(app) {
         this.srGroup.clearLayers();
         if(this.currentCity)
           this.changeBoundaries(this.currentCity);
-      }else if(this.map.getZoom() > 6){
+      }else if(this.map.getZoom() > 9){
         //cluster markers.
         console.log("city level cluster-markers")
         this.mapBoundaries.clearLayers();
@@ -120,6 +120,8 @@ function(app) {
       if(this.map.getZoom() < 13)
         return;
       var boundaries = city.get("boundaries");
+      if(!boundaries)
+        return;
       this.mapBoundaries.clearLayers();
       this.mapBoundaries = new L.LayerGroup();
       var self =  this;
@@ -254,6 +256,7 @@ function(app) {
       if(!p){
         return;
       }
+      var cpoints = []
       if(p.geometry.type == "MultiPolygon"){
         _.each(p.geometry.coordinates, function(poly){
           points[count] = [];
@@ -262,14 +265,13 @@ function(app) {
             points[count][count2] = [];
             _.each(poly2, function(coord){
               points[count][count2].push(new L.LatLng(coord[1], coord[0]));
+              cpoints.push({x:coord[0], y:coord[1]})
             });
             count2++;
           });
           count++;
         });
       }else if(p.geometry.type == "Polygon"){
-        console.log("polygon",city.get("name"))
-        var cpoints = []
 
         _.each(p.geometry.coordinates, function(poly){
           points[count] = [];
@@ -280,29 +282,29 @@ function(app) {
           count++;
         });
 
-
-        var sum = 0;
-        if(city.get("stats")){
-          sum = city.get("stats").reduce(function(memo, stat){ return memo + stat.get("opened_requests"); }, sum);
-        }else{
-          sum = this.serviceRequests.where({"jurisdiction_id": 
-                                            app.filters.where({"name":"jurisdiction_id"})[0].get("value")}).length;
-        }
-        
-
-        var center =  PolygonCentroid(cpoints);        
-        var boundaryIcon = L.divIcon({className: 'boundary-icon',
-                                      iconAnchor:[30, 30],
-                                      iconSize:[60,60],
-                                      html:"<div class='cluster-marker'>"+
-                                      "<img src='/assets/img/markers/cluster.png' />"+
-                                      "<div class='marker-label'>"+sum+"</div></div>"
-                                     });
-
-        this.cityClusterMarker = new L.Marker([center[1], center[0]], 
-                                              {icon:boundaryIcon});
-        this.cityClusterMarker.addTo(this.map);
       }
+      var sum = 0;
+      if(city.get("stats")){
+        sum = city.get("stats").reduce(function(memo, stat){ return memo + stat.get("opened_requests"); }, sum);
+      }else{
+        sum = this.serviceRequests.where({"jurisdiction_id": 
+                                          app.filters.where({"name":"jurisdiction_id"})[0].get("value")}).length;
+      }
+      
+
+      var center =  PolygonCentroid(cpoints);        
+      var boundaryIcon = L.divIcon({className: 'boundary-icon',
+                                    iconAnchor:[30, 30],
+                                    iconSize:[60,60],
+                                    html:"<div class='cluster-marker'>"+
+                                    "<img src='/assets/img/markers/cluster.png' />"+
+                                    "<div class='marker-label'>"+sum+"</div></div>"
+                                   });
+
+      this.cityClusterMarker = new L.Marker([center[1], center[0]], 
+                                            {icon:boundaryIcon});
+      this.cityClusterMarker.addTo(this.map);
+      
       
       this.cityPolygon  = new L.MultiPolygon(points, {stroke:true, color:"#333", weight:4, fill:false});
       this.cityPolygon.bindPopup(city.get("name"));
