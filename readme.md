@@ -38,4 +38,4 @@ this repo will allow the `bbb` commands to work out-of-the-box.
 
 ## License ##
 
-See [License](License.md)
+See [License](license.md)
