@@ -60,7 +60,7 @@ function(app) {
     events: {},
     firstLoad:true,
     afterRender: function(ev){ 
-      var url = 'http://a.tiles.mapbox.com/v3/dmt.map-cdkzgmkx.jsonp';
+      var url = 'http://a.tiles.mapbox.com/v3/dmt.map-f9qb0tnz.jsonp';
       var self = this;
       this.map = new L.Map('map', {zoomControl:false})  
         .setView(new L.LatLng(37.774, -98.419), 5);
