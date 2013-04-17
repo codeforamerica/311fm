@@ -1,10 +1,11 @@
 define([
   // Application.
-  "app"
+  "app",
+  "modules/stats"
 ],
 
 // Map dependencies from above array.
-function(app) {
+function(app, Stats) {
 
   // Create a new module.
   var ServiceRequest = app.module();
@@ -25,7 +26,7 @@ function(app) {
     },
     sync: function(method, collection, options){
       var filterParams = this.filterParams();
-      filterParams.page_size = 200;
+      filterParams.page_size = 300;
       
       if(!options.data)
         options.data = {};
@@ -56,10 +57,31 @@ function(app) {
 
                          }
 
-
+                         //console.log(data)
                          for(d in data){
+
                            data[d].city = city.get("name");
+                           data[d].jurisdiction_id = city.get("jurisdiction_id");
                          }
+
+
+
+                         // If this city has a stats api, use that.  If not calc some stats here.
+                         if(city.get("stats_url")){
+
+                           $.ajax(city.get("stats_url"), 
+                                  {data:{start:"2012-09-01", end:"2012-10-01"},
+                                   dataType:"jsonp", 
+                                   success:function(data){
+                                     var stats = new Stats.Collection();
+                                     stats.add(data.summaries);
+                                     city.set("stats", stats);
+                                   }});
+                         }
+
+                         // Else If the city has boundaries, calc those stats based on open311 data.
+
+
                          collection.add(data, {silent:true});
                          collection.trigger("add");
                        },
